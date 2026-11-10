@@ -22,6 +22,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -287,8 +288,15 @@ private fun VideoPane(
         // Tuning transition: brief analog static, keyed to each user-initiated tune.
         val showsStatic = ps.tuneReason in setOf(TuneReason.USER, TuneReason.STARTUP, TuneReason.RESUME, TuneReason.RECONNECT, TuneReason.TAKEDOWN)
         var staticVisible by remember(ps.tuneToken) { mutableStateOf(showsStatic) }
+        val phaseNow by rememberUpdatedState(ps.phase)
         LaunchedEffect(ps.tuneToken) {
             delay(effects.tuneStaticMs)
+            // Like a real set finding the signal: stay on static until the picture is moving (at most a few
+            // seconds more), so a channel change never shows frozen frames.
+            var waited = 0L
+            while (waited < STATIC_HOLD_MAX_MS && (phaseNow == PlayerPhase.TUNING || phaseNow == PlayerPhase.BUFFERING)) {
+                delay(50); waited += 50
+            }
             staticVisible = false
         }
         if (staticVisible) {
@@ -313,3 +321,6 @@ private fun VideoPane(
         ov.toast?.let { Toast(it, Modifier.align(Alignment.TopCenter).padding(top = 12.dp)) }
     }
 }
+
+/** Longest the tuning static waits for the picture before giving way to the buffering indicator. */
+private const val STATIC_HOLD_MAX_MS = 4_000L

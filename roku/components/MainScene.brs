@@ -27,6 +27,11 @@ sub init()
     m.basePos = 0.0
     m.baseMs = 0
     m.until = 0.0
+    ' Learned start-up time (seconds): new programs start this far past live so they land on time.
+    m.lead = 2.0
+    m.awaitStart = false
+    m.startMs = 0
+    m.settleUntilMs = 0
 
     m.video.observeField("state", "onState")
     m.bannerTimer.observeField("fire", "hideBanner")
@@ -194,12 +199,16 @@ sub tick()
             content.url = it.u
             if it.f = "hls" then content.streamFormat = "hls" else content.streamFormat = "mp4"
             content.title = it.t
-            content.PlayStart = Int(livePos())
+            content.PlayStart = Int(livePos() + m.lead)
             m.url = it.u
             m.video.content = content
             m.video.control = "play"
+            m.awaitStart = true
+            m.startMs = m.clock.TotalMilliseconds()
         else
-            m.video.seek = livePos()
+            ' Same file continues (the next part of a show): keep playing unless it's well off the clock.
+            d = m.video.position - livePos()
+            if d > 6 or d < -6 then m.video.seek = livePos() + catchUpLead()
         end if
         hideSlate()
     end if
@@ -391,10 +400,19 @@ end sub
 
 sub onState()
     st = m.video.state
+    if st = "playing" and m.awaitStart
+        ' Learn how long this TV + connection takes to start a stream.
+        m.awaitStart = false
+        took = (m.clock.TotalMilliseconds() - m.startMs) / 1000.0
+        if took > 6 then took = 6
+        m.lead = m.lead * 0.6 + took * 0.4
+        if m.lead < 0.5 then m.lead = 0.5
+        m.settleUntilMs = m.clock.TotalMilliseconds() + 20000
+    end if
     if st = "paused"
         ' Live TV can't be paused: resume and rejoin the live position.
         m.video.control = "resume"
-        m.video.seek = livePos()
+        m.video.seek = livePos() + catchUpLead()
         showToast("LIVE TV")
     else if st = "error"
         showSlate("TECHNICAL DIFFICULTIES", "Please stand by")
@@ -406,12 +424,21 @@ sub onState()
     end if
 end sub
 
+' Only big drift seeks: a seek throws the buffer away, and right after a start that caused stop-start
+' playback while it kept falling behind and re-seeking. Settling streams get extra slack.
 sub checkLive()
     if m.video.state = "playing"
+        limit = 6
+        if m.clock.TotalMilliseconds() < m.settleUntilMs then limit = 12
         drift = m.video.position - livePos()
-        if drift > 5 or drift < -5 then m.video.seek = livePos()
+        if drift > limit or drift < -limit then m.video.seek = livePos() + catchUpLead()
     end if
 end sub
+
+function catchUpLead() as Float
+    if m.lead > 2.5 then return 2.5
+    return m.lead
+end function
 
 sub showBanner()
     m.banner.visible = true

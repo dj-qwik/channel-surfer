@@ -10,12 +10,14 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
+import androidx.media3.common.Timeline
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.cast.CastPlayer
 import androidx.media3.cast.SessionAvailabilityListener
 import androidx.media3.datasource.okhttp.OkHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.ExoPlaybackException
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import com.channelsurf.cast.CastManager
@@ -25,6 +27,7 @@ import com.channelsurf.core.model.HealthStatus
 import com.google.android.gms.cast.framework.CastContext
 import com.channelsurf.core.net.BackoffPolicy
 import com.channelsurf.core.net.FailureClass
+import com.channelsurf.core.schedule.CatchUpPolicy
 import com.channelsurf.core.schedule.DriftPolicy
 import com.channelsurf.core.schedule.SlateKind
 import com.channelsurf.core.schedule.TuneResolution
@@ -104,8 +107,14 @@ class PlayerController(
                 OkHttpDataSource.Factory(callFactory).setUserAgent(ArchiveHttp.USER_AGENT)
             )
         )
-        // Bounded prebuffer: enough to ride out Archive hiccups without downloading whole tapes.
-        .setLoadControl(DefaultLoadControl.Builder().setBufferDurationsMs(15_000, 45_000, 1_500, 3_000).build())
+        // Start on 1 s of video (fast channel changes); keep up to 45 s ahead, which also pre-loads the next
+        // commercial or segment queued behind the current one.
+        .setLoadControl(
+            DefaultLoadControl.Builder()
+                .setBufferDurationsMs(15_000, 45_000, 1_000, 2_500)
+                .setPrioritizeTimeOverSizeThresholds(true)
+                .build()
+        )
         .setAudioAttributes(
             AudioAttributes.Builder().setUsage(C.USAGE_MEDIA).setContentType(C.AUDIO_CONTENT_TYPE_MOVIE).build(),
             /* handleAudioFocus = */ true,
@@ -138,6 +147,16 @@ class PlayerController(
     private var preparedAtUptime = 0L
     private val triedAlternates = HashMap<String, Int>()
 
+    /** What's loaded in the local ExoPlayer, in playlist order: [0] is on screen, [1] is pre-loading. */
+    private data class Queued(val res: TuneResolution.Play, val clipStartMs: Long)
+    private val playlist = ArrayList<Queued>()
+    private var preloadJob: Job? = null
+    private val preloadFailed = HashSet<String>()
+    private val startup = CatchUpPolicy.StartupEstimator()
+    private var speed = 1f
+    private var awaitingFirstReady = false
+    private val isLocal: Boolean get() = active === player
+
     private val listener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
@@ -150,7 +169,11 @@ class PlayerController(
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             // Audio-focus loss (a phone call) pauses the player; when it resumes we must rejoin live.
-            if (isPlaying) reconcile(adaptiveTolerance())
+            if (isPlaying) { if (isLocal) keepInSync() else reconcile(adaptiveTolerance()) }
+        }
+
+        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+            if (reason == Player.MEDIA_ITEM_TRANSITION_REASON_AUTO || reason == Player.MEDIA_ITEM_TRANSITION_REASON_SEEK) segue()
         }
 
         override fun onPlayerError(error: PlaybackException) = handleError(error)
@@ -167,7 +190,7 @@ class PlayerController(
             if (reason != Player.DISCONTINUITY_REASON_SEEK) return
             if (internalSeek) { internalSeek = false; return }
             // Someone seeked from outside the app (e.g. the Cast receiver's controls): snap back to the live position.
-            reconcile(DriftPolicy.TUNE_TOLERANCE_MS)
+            if (isLocal) keepInSync(forceSeekOverMs = DriftPolicy.TUNE_TOLERANCE_MS) else reconcile(DriftPolicy.TUNE_TOLERANCE_MS)
         }
     }
 
@@ -212,6 +235,9 @@ class PlayerController(
         suspended = false
         current = null
         catchUpSeeks = 0
+        preloadJob?.cancel()
+        playlist.clear()
+        setSpeed(1f)
         active.stop()
         _state.update {
             it.copy(
@@ -399,6 +425,9 @@ class PlayerController(
     private fun switchTo(target: Player) {
         if (active === target) return
         runCatching { active.stop() }
+        preloadJob?.cancel()
+        playlist.clear()
+        setSpeed(1f)
         active = target
         val casting = isCasting
         if (casting) _roku.value = null
@@ -430,47 +459,183 @@ class PlayerController(
                     }
                     return
                 }
-                val url = chooseUrl(res, s)
-                val builder = MediaItem.Builder().setUri(url).setMediaId(res.asset.id)
-                    .setMimeType(
-                        when (res.asset.container) {
-                            "webm" -> MimeTypes.VIDEO_WEBM
-                            "hls" -> MimeTypes.APPLICATION_M3U8
-                            else -> MimeTypes.VIDEO_MP4
-                        }
-                    )
-                    .setMediaMetadata(
-                        MediaMetadata.Builder()
-                            .setTitle(res.block.headline)
-                            .setArtist("${res.channel.displayNumber} ${res.channel.displayName}")
-                            .build()
-                    )
-                res.asset.captionUrl?.let { cap ->
-                    builder.setSubtitleConfigurations(
-                        listOf(
-                            MediaItem.SubtitleConfiguration.Builder(Uri.parse(cap))
-                                .setMimeType(if (cap.endsWith(".vtt", true)) MimeTypes.TEXT_VTT else MimeTypes.APPLICATION_SUBRIP)
-                                .setLanguage("en")
-                                .setSelectionFlags(C.SELECTION_FLAG_DEFAULT)
-                                .build()
-                        )
-                    )
-                }
-                // Recompute at prepare time: the metadata lookup must not put us behind the broadcast.
-                val position = res.expectedFilePositionMs(clock.nowUtcMs()).coerceAtLeast(0)
+                val local = isLocal
+                val builder = mediaItemBuilder(res, s)
+                // Locally the item stops exactly at the block's end, so the pre-loaded next item follows seamlessly.
+                if (local) builder.setClippingConfiguration(
+                    MediaItem.ClippingConfiguration.Builder().setEndPositionMs(clipEndMs(res)).build()
+                )
+                // Recompute at prepare time, and start ahead by the time this connection usually takes to get going,
+                // so we land on the live point instead of behind it (which used to trigger seek after seek).
+                val lead = if (local) startup.estimateMs else 0L
+                val position = (res.expectedFilePositionMs(clock.nowUtcMs()) + lead).coerceAtLeast(0)
+                    .let { if (local) it.coerceAtMost((clipEndMs(res) - 1_000).coerceAtLeast(0)) else it }
                 active.setMediaItem(builder.build(), position)
                 active.prepare()
                 active.playWhenReady = true
                 preparedAtUptime = SystemClock.uptimeMillis()
+                awaitingFirstReady = true
+                if (local) { playlist += Queued(res, 0); schedulePreload(res) }
                 _state.update {
                     it.copy(phase = PlayerPhase.BUFFERING, resolution = res, message = null, captionsAvailable = res.asset.captionUrl != null)
                 }
                 diagnostics.log(
                     DiagnosticsLog.Event(
                         clock.nowUtcMs(), DiagnosticsLog.Level.INFO, "tune",
-                        "${res.channel.displayNumber} ${res.block.displayTitle} @${position}ms" + if (res.isSubstitute) " (substitute)" else "",
+                        "${res.channel.displayNumber} ${res.block.displayTitle} @${position}ms (lead ${lead}ms)" + if (res.isSubstitute) " (substitute)" else "",
                         channelId = res.channel.id, archiveIdentifier = res.asset.archiveIdentifier,
                         fileName = res.asset.fileName, codec = res.asset.codec,
+                    )
+                )
+            }
+        }
+    }
+
+    private fun clipEndMs(res: TuneResolution.Play): Long = res.expectedFilePositionMs(res.playUntilUtcMs).coerceAtLeast(1)
+
+    private fun mediaItemBuilder(res: TuneResolution.Play, s: Settings): MediaItem.Builder {
+        val url = chooseUrl(res, s)
+        val builder = MediaItem.Builder().setUri(url).setMediaId(res.asset.id)
+            .setMimeType(
+                when (res.asset.container) {
+                    "webm" -> MimeTypes.VIDEO_WEBM
+                    "hls" -> MimeTypes.APPLICATION_M3U8
+                    else -> MimeTypes.VIDEO_MP4
+                }
+            )
+            .setMediaMetadata(
+                MediaMetadata.Builder()
+                    .setTitle(res.block.headline)
+                    .setArtist("${res.channel.displayNumber} ${res.channel.displayName}")
+                    .build()
+            )
+        res.asset.captionUrl?.let { cap ->
+            builder.setSubtitleConfigurations(
+                listOf(
+                    MediaItem.SubtitleConfiguration.Builder(Uri.parse(cap))
+                        .setMimeType(if (cap.endsWith(".vtt", true)) MimeTypes.TEXT_VTT else MimeTypes.APPLICATION_SUBRIP)
+                        .setLanguage("en")
+                        .setSelectionFlags(C.SELECTION_FLAG_DEFAULT)
+                        .build()
+                )
+            )
+        }
+        return builder
+    }
+
+    /**
+     * Queues the next block behind the current one. ExoPlayer starts loading it as soon as the current item is
+     * buffered to its end, so commercials and the show's next segment are already on hand when they're due.
+     */
+    private fun schedulePreload(res: TuneResolution.Play) {
+        preloadJob?.cancel()
+        if (!isLocal) return
+        val token = sequencer.current
+        preloadJob = scope.launch {
+            // Let the item on screen have the bandwidth first.
+            delay(PRELOAD_DELAY_MS)
+            if (!sequencer.isCurrent(token) || current !== res || playlist.size != 1) return@launch
+            if (res.playUntilUtcMs < res.block.endUtcMs - 1_000) return@launch // file runs short: a slate follows
+            val next = try { schedule.current(res.channel.id, res.block.endUtcMs) } catch (e: Exception) { return@launch }
+            if (!sequencer.isCurrent(token) || current !== res || playlist.size != 1 || !isLocal) return@launch
+            if (next !is TuneResolution.Play || next.asset.id in preloadFailed) return@launch
+            val s = settings.value
+            val net = network.status.value
+            if (!net.online || (net.metered && s.wifiOnly)) return@launch
+            val clipStart = next.filePositionMs.coerceAtLeast(0)
+            val clipEnd = clipEndMs(next)
+            if (clipEnd <= clipStart + 500) return@launch
+            val item = mediaItemBuilder(next, s).setClippingConfiguration(
+                MediaItem.ClippingConfiguration.Builder().setStartPositionMs(clipStart).setEndPositionMs(clipEnd).build()
+            ).build()
+            player.addMediaItem(item)
+            playlist += Queued(next, clipStart)
+        }
+    }
+
+    /** The player moved on to the pre-loaded item, with no gap and no reload. */
+    private fun segue() {
+        if (!isLocal || playlist.size < 2 || player.currentMediaItemIndex != 1) return
+        player.removeMediaItem(0)
+        playlist.removeAt(0)
+        val res = playlist[0].res
+        current = res
+        catchUpSeeks = 0
+        retryAttempt = 0
+        preparedAtUptime = SystemClock.uptimeMillis()
+        _state.update {
+            it.copy(
+                phase = PlayerPhase.PLAYING, resolution = res, message = null,
+                captionsAvailable = res.asset.captionUrl != null, tuneReason = TuneReason.BLOCK_END,
+            )
+        }
+        diagnostics.log(
+            DiagnosticsLog.Event(
+                clock.nowUtcMs(), DiagnosticsLog.Level.INFO, "segue", "${res.channel.displayNumber} ${res.block.displayTitle} (pre-loaded)",
+                channelId = res.channel.id, archiveIdentifier = res.asset.archiveIdentifier,
+                fileName = res.asset.fileName, codec = res.asset.codec,
+            )
+        )
+        keepInSync()
+        schedulePreload(res)
+    }
+
+    /** Position in the media FILE of what's on screen (clipped items report positions from their clip start). */
+    private fun filePositionMs(): Long {
+        val clip = if (isLocal) playlist.getOrNull(player.currentMediaItemIndex)?.clipStartMs ?: 0L else 0L
+        return active.currentPosition + clip
+    }
+
+    private fun hasQueuedNext(): Boolean = isLocal && playlist.size >= 2
+
+    private fun setSpeed(s: Float) {
+        if (s == speed) return
+        speed = s
+        runCatching { player.setPlaybackSpeed(s) }
+    }
+
+    /**
+     * Local sync: nudge the speed for small drift, seek only for big drift. Never decides mid-buffering.
+     * [forceSeekOverMs] is for outside seeks (media controls), which should snap back right away.
+     */
+    private fun keepInSync(forceSeekOverMs: Long? = null) {
+        val res = current as? TuneResolution.Play ?: return
+        if (!isLocal) return reconcile(adaptiveTolerance())
+        val now = clock.nowUtcMs()
+        lastDriftCheckUtcMs = now
+        if (res.isFinishedAt(now)) {
+            if (hasQueuedNext()) {
+                // The pre-loaded item takes over by itself; if playback lags well behind, jump to it.
+                if (now - res.playUntilUtcMs > SEGUE_GRACE_MS) {
+                    val next = playlist[1]
+                    internalSeek = true
+                    player.seekTo(1, (next.res.expectedFilePositionMs(now) - next.clipStartMs).coerceAtLeast(0))
+                }
+            } else tune(res.channel.id, TuneReason.BLOCK_END)
+            return
+        }
+        if (player.playbackState != Player.STATE_READY) return
+        val drift = filePositionMs() - res.expectedFilePositionMs(now)
+        val action = if (forceSeekOverMs != null && kotlin.math.abs(drift) > forceSeekOverMs) CatchUpPolicy.Action.Seek(drift)
+        else CatchUpPolicy.decide(drift, SystemClock.uptimeMillis() - preparedAtUptime, adaptiveTolerance(), speed)
+        when (action) {
+            is CatchUpPolicy.Action.Speed -> {
+                setSpeed(action.speed)
+                if (kotlin.math.abs(drift) < 1_000) catchUpSeeks = 0
+            }
+            is CatchUpPolicy.Action.Seek -> {
+                catchUpSeeks++
+                setSpeed(1f)
+                val clipStart = playlist.getOrNull(player.currentMediaItemIndex)?.clipStartMs ?: 0L
+                // Land a little past live: the seek itself costs a moment of loading.
+                val target = res.expectedFilePositionMs(now) + startup.estimateMs.coerceAtMost(2_500)
+                internalSeek = true
+                player.seekTo((target - clipStart).coerceAtLeast(0))
+                diagnostics.log(
+                    DiagnosticsLog.Event(
+                        now, DiagnosticsLog.Level.INFO, "drift", "Corrected ${action.driftMs} ms",
+                        channelId = res.channel.id, archiveIdentifier = res.asset.archiveIdentifier,
+                        seekOutcome = "seek to $target",
                     )
                 )
             }
@@ -487,8 +652,13 @@ class PlayerController(
     private fun onReady() {
         retryAttempt = 0
         val res = current as? TuneResolution.Play ?: return
+        if (awaitingFirstReady) {
+            awaitingFirstReady = false
+            if (isLocal) startup.record(SystemClock.uptimeMillis() - preparedAtUptime)
+        }
         // After the initial buffer (or any stall) catch up to where the broadcast is NOW.
-        reconcile(if (_state.value.phase == PlayerPhase.BUFFERING && catchUpSeeks == 0) DriftPolicy.TUNE_TOLERANCE_MS else adaptiveTolerance())
+        if (isLocal) keepInSync()
+        else reconcile(if (_state.value.phase == PlayerPhase.BUFFERING && catchUpSeeks == 0) DriftPolicy.TUNE_TOLERANCE_MS else adaptiveTolerance())
         if (_state.value.phase != PlayerPhase.PLAYING) {
             _state.update { it.copy(phase = PlayerPhase.PLAYING, message = null) }
             diagnostics.log(
@@ -533,6 +703,9 @@ class PlayerController(
     private fun onMediaEnded() {
         val res = current as? TuneResolution.Play ?: return
         val now = clock.nowUtcMs()
+        // Locally the item is clipped to its block, so reaching the clip end only means we ran a little ahead
+        // of the clock; the monitor moves on when the block's time is up.
+        if (isLocal && filePositionMs() >= clipEndMs(res) - EARLY_END_GRACE_MS) return
         if (now < res.playUntilUtcMs - EARLY_END_GRACE_MS) {
             // The file is shorter than its slot (bad metadata or truncated upload). Never loop it.
             diagnostics.warn("media.ended_early", "${res.asset.archiveIdentifier} ended ${res.playUntilUtcMs - now} ms early")
@@ -547,6 +720,14 @@ class PlayerController(
 
     private fun handleError(e: PlaybackException) {
         val res = current as? TuneResolution.Play ?: return
+        failedQueuedItem(e)?.let { bad ->
+            // The pre-loaded NEXT item failed, not the one on screen. Skip pre-loading it and carry on live;
+            // when its turn comes, the normal tune path substitutes or retries.
+            preloadFailed += bad.asset.id
+            diagnostics.warn("preload.failed", "${bad.asset.archiveIdentifier}: ${e.errorCodeName}")
+            tune(res.channel.id, TuneReason.RETRY)
+            return
+        }
         val failure = PlaybackErrors.classify(e, clock.nowUtcMs())
         diagnostics.log(
             DiagnosticsLog.Event(
@@ -578,6 +759,17 @@ class PlayerController(
             failure is PlaybackFailure.Http || failure is PlaybackFailure.Network -> scheduleRetry(res, (failure as? PlaybackFailure.Http)?.retryAfterMs)
             else -> showTechnicalDifficulties(res)
         }
+    }
+
+    private fun failedQueuedItem(e: PlaybackException): TuneResolution.Play? {
+        if (!isLocal || playlist.size < 2) return null
+        val pid = (e as? ExoPlaybackException)?.mediaPeriodId ?: return null
+        val tl = player.currentTimeline
+        val p = tl.getIndexOfPeriod(pid.periodUid)
+        if (p == C.INDEX_UNSET) return null
+        val window = tl.getPeriod(p, Timeline.Period()).windowIndex
+        if (window == player.currentMediaItemIndex) return null
+        return playlist.getOrNull(window)?.res
     }
 
     private fun scheduleRetry(res: TuneResolution.Play, retryAfterMs: Long?) {
@@ -624,6 +816,7 @@ class PlayerController(
             val now = clock.nowUtcMs()
             when (val r = current) {
                 is TuneResolution.Play -> when {
+                    isLocal && _roku.value == null -> if (r.isFinishedAt(now) || now - lastDriftCheckUtcMs >= LOCAL_SYNC_INTERVAL_MS) keepInSync()
                     r.isFinishedAt(now) -> tune(r.channel.id, TuneReason.BLOCK_END)
                     active.isPlaying && now - lastDriftCheckUtcMs >= DRIFT_CHECK_INTERVAL_MS -> reconcile(adaptiveTolerance())
                 }
@@ -645,6 +838,11 @@ class PlayerController(
 
     companion object {
         const val DRIFT_CHECK_INTERVAL_MS = 30_000L
+        /** Local playback checks drift often: the fixes are gentle speed nudges, not seeks. */
+        const val LOCAL_SYNC_INTERVAL_MS = 2_000L
+        const val PRELOAD_DELAY_MS = 3_000L
+        /** How far behind the clock the pre-loaded item may start before we jump to it. */
+        const val SEGUE_GRACE_MS = 4_000L
         const val MAX_TOLERANCE_MS = 15_000L
         const val EARLY_END_GRACE_MS = 2_000L
         /** How much schedule the Roku gets at a time, and how often it's topped up. */
