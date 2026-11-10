@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="MainScene" extends="Scene">
+  <interface>
+    <field id="cmd" type="assocarray" onChange="onCmd" alwaysNotify="true" />
+  </interface>
+  <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+  <children>
+    <Rectangle id="bg" width="1920" height="1080" color="0x000000FF" />
+    <Video id="video" width="1920" height="1080" enableTrickPlay="false" enableUI="false" />
+
+    <!-- "Nothing on": analog snow + hiss, with the message box drifting around so nothing burns in.
+         After a long stretch it fades to a dark screensaver (bouncing logo, no hiss). -->
+    <Group id="slate" visible="false">
+      <Group id="snow">
+        <Poster id="snow0" width="1920" height="1080" uri="pkg:/images/snow0.png" loadDisplayMode="scaleToFill" />
+        <Poster id="snow1" width="1920" height="1080" uri="pkg:/images/snow1.png" loadDisplayMode="scaleToFill" visible="false" />
+        <Poster id="snow2" width="1920" height="1080" uri="pkg:/images/snow2.png" loadDisplayMode="scaleToFill" visible="false" />
+        <Poster id="snow3" width="1920" height="1080" uri="pkg:/images/snow3.png" loadDisplayMode="scaleToFill" visible="false" />
+        <Poster id="snow4" width="1920" height="1080" uri="pkg:/images/snow4.png" loadDisplayMode="scaleToFill" visible="false" />
+        <Poster id="snow5" width="1920" height="1080" uri="pkg:/images/snow5.png" loadDisplayMode="scaleToFill" visible="false" />
+      </Group>
+      <Rectangle id="msgBox" translation="[360,380]" width="1200" height="300" color="0x000000B0">
+        <Label id="slateTitle" translation="[0,50]" width="1200" horizAlign="center" color="0xFFFFFFFF" text="NO SIGNAL" font="font:LargeBoldSystemFont" />
+        <Label id="slateText" translation="[60,170]" width="1080" horizAlign="center" wrap="true" color="0xD8E0F0FF"
+               text="Open Channel Surfer on your phone and tap CAST." font="font:MediumSystemFont" />
+      </Rectangle>
+      <Rectangle id="saver" width="1920" height="1080" color="0x000000FF" visible="false">
+        <Poster id="saverLogo" translation="[800,430]" width="290" height="218" uri="pkg:/images/icon_hd.png" opacity="0.55" />
+      </Rectangle>
+    </Group>
+    <!-- Sound-effect channel: plays alongside (and never blocks) the video player. -->
+    <SoundEffect id="hiss" uri="pkg:/sounds/hiss.wav" volume="50" />
+
+    <Rectangle id="banner" translation="[80,830]" width="1760" height="170" color="0x061B5BEE" visible="false">
+      <Rectangle width="220" height="170" color="0xF2C230FF">
+        <Label id="num" width="220" height="170" horizAlign="center" vertAlign="center" color="0x061B5BFF" font="font:LargeBoldSystemFont" />
+      </Rectangle>
+      <Label id="chName" translation="[250,18]" width="1300" color="0xFFFFFFFF" font="font:MediumBoldSystemFont" />
+      <Label id="progTitle" translation="[250,82]" width="1460" color="0x7FE3F0FF" font="font:MediumSystemFont" />
+      <Label id="live" translation="[1580,22]" width="150" horizAlign="center" color="0xFFFFFFFF" text="LIVE" font="font:SmallBoldSystemFont" />
+    </Rectangle>
+
+    <Label id="toast" translation="[0,60]" width="1920" horizAlign="center" color="0xF2C230FF" visible="false" font="font:MediumBoldSystemFont" />
+
+
+    <!-- Power-on: dot of light, a line snapping open, static, then the Channel Surfer card rolls in (~3.3 s). -->
+    <Group id="intro">
+      <Rectangle width="1920" height="1080" color="0x000000FF" />
+      <Group id="introSnow" visible="false">
+        <Poster id="isnow0" width="1920" height="1080" uri="pkg:/images/snow0.png" loadDisplayMode="scaleToFill" />
+        <Poster id="isnow1" width="1920" height="1080" uri="pkg:/images/snow2.png" loadDisplayMode="scaleToFill" visible="false" />
+        <Poster id="isnow2" width="1920" height="1080" uri="pkg:/images/snow4.png" loadDisplayMode="scaleToFill" visible="false" />
+      </Group>
+      <Rectangle id="introLine" width="0" height="6" translation="[960,537]" color="0xEAF6FFFF" visible="false" />
+      <Poster id="introDot" width="40" height="40" translation="[940,520]" uri="pkg:/images/glow.png" visible="false" />
+      <Poster id="introLogo" width="1920" height="1080" uri="pkg:/images/splash_fhd.png" opacity="0" />
+      <Poster id="introScan" width="1920" height="1080" uri="pkg:/images/scanlines.png" opacity="0" />
+      <Label id="introCh" translation="[1560,70]" width="300" horizAlign="right" color="0x7CFF7CFF" text="CH 03" font="font:LargeBoldSystemFont" visible="false" />
+    </Group>
+    <SoundEffect id="powerOn" uri="pkg:/sounds/tv_on.wav" volume="70" />
+
+    <Timer id="bannerTimer" duration="5" />
+    <Timer id="toastTimer" duration="3" />
+    <Timer id="liveTimer" duration="15" repeat="true" />
+    <Timer id="tickTimer" duration="1" repeat="true" />
+    <Timer id="snowTimer" duration="0.06" repeat="true" />
+    <Timer id="driftTimer" duration="0.05" repeat="true" />
+    <Timer id="hissTimer" duration="4.0" repeat="true" />
+    <Timer id="retryTimer" duration="5" />
+    <Timer id="introTimer" duration="0.033" repeat="true" />
+  </children>
+</component>

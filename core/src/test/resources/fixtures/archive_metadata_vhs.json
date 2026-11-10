@@ -1,0 +1,32 @@
+{
+  "created": 1762180000,
+  "d1": "ia800300.us.archive.org",
+  "dir": "/1/items/fixture-wxyz-1994-aircheck",
+  "server": "ia800300.us.archive.org",
+  "metadata": {
+    "identifier": "fixture-wxyz-1994-aircheck",
+    "mediatype": "movies",
+    "collection": ["fixture_tv_airchecks", "fixture_vhs"],
+    "title": "FIXTURE WXYZ Saturday Morning Block",
+    "description": "<p>Off-air VHS recording, Saturday morning &amp; commercials.</p><br/>Station ID and promos intact. Aired September 17, 1994.",
+    "date": "1994-09-17",
+    "year": "1994",
+    "subject": "VHS; aircheck; 1990s; commercials",
+    "creator": "Fixture Uploader",
+    "addeddate": "2019-04-12 03:11:09",
+    "publicdate": "2019-04-12 03:11:09"
+  },
+  "files": [
+    {"name": "WXYZ 1994.mpg", "source": "original", "format": "MPEG2", "length": "21602.50", "size": "9800000000"},
+    {"name": "WXYZ 1994 #2 (tape).mp4", "source": "derivative", "format": "h.264", "length": "21602.50", "size": "2100000000", "width": "640", "height": "480"},
+    {"name": "WXYZ_1994_512kb.mp4", "source": "derivative", "format": "512Kb MPEG4", "length": "21602.50", "size": "1300000000", "width": "320", "height": "240"},
+    {"name": "WXYZ 1994.webm", "source": "derivative", "format": "WebM", "length": "21602.50", "width": "640", "height": "480"},
+    {"name": "WXYZ 1994.ogv", "source": "derivative", "format": "Ogg Video", "length": "21602.50"},
+    {"name": "WXYZ 1994.srt", "source": "original", "format": "SubRip"},
+    {"name": "WXYZ 1994.en.vtt", "source": "derivative", "format": "Web Video Text Tracks"},
+    {"name": "__ia_thumb.jpg", "source": "original", "format": "Item Tile"},
+    {"name": "WXYZ 1994.thumbs/WXYZ 1994_000001.jpg", "source": "derivative", "format": "Thumbnail"},
+    {"name": "fixture-wxyz-1994-aircheck_meta.xml", "source": "original", "format": "Metadata"}
+  ],
+  "is_dark": false
+}

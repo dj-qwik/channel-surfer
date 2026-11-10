@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chunky 90s CRT with rabbit-ear antennas showing color bars. Kept inside the 66dp adaptive safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group android:scaleX="0.86" android:scaleY="0.86" android:pivotX="54" android:pivotY="52">
+    <!-- antennas -->
+    <path android:strokeColor="#FFE6E6F0" android:strokeWidth="1.8" android:strokeLineCap="round"
+        android:pathData="M54,40L40,24 M54,40L70,22" />
+    <path android:fillColor="#FFFF4FA3" android:pathData="M40,24m-2.4,0a2.4,2.4 0,1 1,4.8 0a2.4,2.4 0,1 1,-4.8 0" />
+    <path android:fillColor="#FF29B6C8" android:pathData="M70,22m-2.4,0a2.4,2.4 0,1 1,4.8 0a2.4,2.4 0,1 1,-4.8 0" />
+    <path android:fillColor="#FF2B2B3A" android:pathData="M48,40h12l-2,-4h-8z" />
+    <!-- drop shadow -->
+    <path android:fillColor="#66000000" android:pathData="M29,43h54a5,5 0,0 1,5 5v30a5,5 0,0 1,-5 5h-54a5,5 0,0 1,-5 -5v-30a5,5 0,0 1,5 -5z" />
+    <!-- cabinet -->
+    <path android:pathData="M27,40h54a5,5 0,0 1,5 5v30a5,5 0,0 1,-5 5h-54a5,5 0,0 1,-5 -5v-30a5,5 0,0 1,5 -5z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="54" android:startY="40" android:endX="54" android:endY="80"
+                android:startColor="#FFF7D354" android:endColor="#FFD99A12" />
+        </aapt:attr>
+    </path>
+    <!-- screen bezel -->
+    <path android:fillColor="#FF1B1B2A" android:pathData="M30,44h36a3,3 0,0 1,3 3v24a3,3 0,0 1,-3 3h-36a3,3 0,0 1,-3 -3v-24a3,3 0,0 1,3 -3z" />
+    <!-- color bars -->
+    <path android:fillColor="#FFC0C0C0" android:pathData="M31,47h5v18h-5z" />
+    <path android:fillColor="#FFC0C000" android:pathData="M36,47h5v18h-5z" />
+    <path android:fillColor="#FF00C0C0" android:pathData="M41,47h5v18h-5z" />
+    <path android:fillColor="#FF00C000" android:pathData="M46,47h5v18h-5z" />
+    <path android:fillColor="#FFC000C0" android:pathData="M51,47h5v18h-5z" />
+    <path android:fillColor="#FFC00000" android:pathData="M56,47h5v18h-5z" />
+    <path android:fillColor="#FF0000C0" android:pathData="M61,47h5v18h-5z" />
+    <path android:fillColor="#FF0A1A5C" android:pathData="M31,65h35v6h-35z" />
+    <!-- channel OSD block + glare -->
+    <path android:fillColor="#FF7CFF7C" android:pathData="M57,66.5h3v3h-3z M61,66.5h3v3h-3z" />
+    <path android:fillColor="#40FFFFFF" android:pathData="M32,48h14l-8,10h-6z" />
+    <!-- knobs and speaker -->
+    <path android:fillColor="#FF2B2B3A" android:pathData="M77,50m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0" />
+    <path android:fillColor="#FF2B2B3A" android:pathData="M77,60m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path android:strokeColor="#FFF2C230" android:strokeWidth="1" android:pathData="M77,47.5v3 M77,58v2.5" />
+    <path android:strokeColor="#FF8A5A00" android:strokeWidth="1" android:pathData="M73,68h8 M73,71h8 M73,74h8" />
+    <!-- feet -->
+    <path android:fillColor="#FF2B2B3A" android:pathData="M32,80h6l-1,3h-4z M70,80h6l-1,3h-4z" />
+    </group>
+</vector>

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "revision": "fixture-2026-11-03",
+  "generatedAtUtcMs": 1762180000000,
+  "eraPolicy": {"minYear": 1990, "maxYear": 2005, "preferredMaxYear": 1999},
+  "channels": [
+    {
+      "id": "ch-02-saturday-morning",
+      "number": 2,
+      "displayName": "Saturday Morning",
+      "genre": "Cartoons",
+      "categoryLabel": "KIDS",
+      "color": "#F2C230",
+      "enabled": true,
+      "epochUtcMs": 1767225600000,
+      "policy": "CYCLIC",
+      "playlist": ["sat-am-1995"],
+      "fallbackPool": []
+    },
+    {
+      "id": "ch-03-sitcom-central",
+      "number": 2,
+      "displayName": "Sitcom Central",
+      "genre": "Sitcoms",
+      "categoryLabel": "COMEDY",
+      "color": "#29B6C8",
+      "epochUtcMs": 1767225600000,
+      "policy": "CYCLIC",
+      "playlist": []
+    }
+  ],
+  "assets": [
+    {
+      "id": "sat-am-1995",
+      "archiveIdentifier": "fixture-saturday-morning-1995",
+      "fileName": "saturday morning 1995.mp4",
+      "url": "https://archive.org/download/fixture-saturday-morning-1995/saturday%20morning%201995.mp4",
+      "title": "1995 Saturday Morning VHS Block",
+      "description": "Fixture asset for tests.",
+      "durationMs": 14400000,
+      "sourceStartMs": 4000,
+      "seekable": true,
+      "codec": "h264",
+      "container": "mp4",
+      "aspectRatio": "4:3",
+      "broadcastYear": 1995,
+      "yearVerified": true,
+      "yearEvidence": "fixture",
+      "rightsStatus": "TEST_ONLY",
+      "rightsNotes": "Test fixture; not real media.",
+      "provenance": "ORIGINAL_RECORDING",
+      "adOrigin": "EMBEDDED_ORIGINAL",
+      "segments": [
+        {"offsetMs": 0, "label": "Cold open", "kind": "PROGRAM"},
+        {"offsetMs": 600000, "label": "Commercial break", "kind": "COMMERCIAL"}
+      ]
+    }
+  ]
+}

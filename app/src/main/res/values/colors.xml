@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cable_navy">#FF061B5B</color>
+    <color name="cable_cobalt">#FF1748A5</color>
+    <color name="cable_teal">#FF29B6C8</color>
+    <color name="cable_mustard">#FFF2C230</color>
+    <color name="cable_black">#FF000000</color>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Platform theme only; all UI is Compose. Black window so there is no flash before the boot splash. -->
+    <style name="Theme.ChannelSurf" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/cable_black</item>
+        <item name="android:colorPrimary">@color/cable_cobalt</item>
+        <item name="android:colorAccent">@color/cable_mustard</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

@@ -1,0 +1,4606 @@
+{
+  "schemaVersion": 1,
+  "revision": "cable-lineup-2026-11-04",
+  "generatedAtUtcMs": 1762182000000,
+  "eraPolicy": {
+    "minYear": 1990,
+    "maxYear": 2015,
+    "preferredMaxYear": 2005
+  },
+  "reviewPolicy": "AUTOMATIC",
+  "channels": [
+    {
+      "id": "ch-01-prevue-channel",
+      "number": 1,
+      "displayName": "Prevue Channel",
+      "genre": "Guide",
+      "categoryLabel": "GUIDE",
+      "color": "#7FA7E0",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "prevue-channel",
+        "tv-guide-channel"
+      ],
+      "fillerTags": [
+        "prevue-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "prevue channel 199*",
+        "prevue channel",
+        "prevue guide 1995",
+        "tv guide channel 2000"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "commercials-90s",
+        "tv-guide-channel"
+      ]
+    },
+    {
+      "id": "ch-02-cbs",
+      "number": 2,
+      "displayName": "CBS",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#3A6FD8",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "this-morning",
+          "title": "CBS This Morning",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 420,
+          "endMinute": 540,
+          "tags": [
+            "cbs-news",
+            "morning-news"
+          ]
+        },
+        {
+          "id": "daytime",
+          "title": "Daytime",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 600,
+          "endMinute": 960,
+          "tags": [
+            "game-show",
+            "soap-opera"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "evening-news",
+          "title": "CBS Evening News",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1110,
+          "endMinute": 1140,
+          "tags": [
+            "cbs-news",
+            "network-news"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "CBS Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1380,
+          "tags": [
+            "cbs",
+            "sitcom",
+            "drama"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "late-show",
+          "title": "Late Show",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1415,
+          "endMinute": 1475,
+          "tags": [
+            "late-show",
+            "late-night"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "saturday-morning",
+          "title": "CBS Saturday Morning",
+          "days": [
+            6
+          ],
+          "startMinute": 420,
+          "endMinute": 720,
+          "tags": [
+            "cbs-kids",
+            "saturday-morning"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "cbs",
+        "sitcom",
+        "drama"
+      ],
+      "fillerTags": [
+        "cbs-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "cbs 199*",
+        "cbs 1996 broadcast",
+        "cbs commercials 1990s",
+        "late show letterman 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "must-see-sitcom",
+        "sitcom",
+        "drama"
+      ]
+    },
+    {
+      "id": "ch-03-pbs",
+      "number": 3,
+      "displayName": "PBS",
+      "genre": "Public Tv",
+      "categoryLabel": "PUBLIC TV",
+      "color": "#E0E0E0",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "pbs-kids",
+          "title": "PBS Kids",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 360,
+          "endMinute": 720,
+          "tags": [
+            "pbs-kids",
+            "sesame-street",
+            "educational-kids"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "newshour",
+          "title": "The NewsHour",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1080,
+          "endMinute": 1140,
+          "tags": [
+            "pbs-news"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "PBS Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1380,
+          "tags": [
+            "pbs",
+            "documentary",
+            "nova",
+            "masterpiece"
+          ],
+          "preferTypes": [
+            "EPISODE",
+            "SPECIAL"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "pbs",
+        "documentary",
+        "how-to"
+      ],
+      "fillerTags": [
+        "pbs-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "pbs 199*",
+        "pbs 1994",
+        "pbs kids 1999",
+        "pbs pledge break",
+        "reading rainbow",
+        "mister rogers neighborhood"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "bob-ross",
+        "henson"
+      ]
+    },
+    {
+      "id": "ch-04-nbc",
+      "number": 4,
+      "displayName": "NBC",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#F2C230",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "today",
+          "title": "Today",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 420,
+          "endMinute": 600,
+          "tags": [
+            "today-show",
+            "morning-news"
+          ]
+        },
+        {
+          "id": "tnbc",
+          "title": "TNBC",
+          "days": [
+            6
+          ],
+          "startMinute": 480,
+          "endMinute": 720,
+          "tags": [
+            "tnbc",
+            "teen-sitcom",
+            "saved-by-the-bell"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "NBC Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1380,
+          "tags": [
+            "nbc",
+            "sitcom",
+            "drama"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "must-see-tv",
+          "title": "Must See TV",
+          "days": [
+            4
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "must-see-tv",
+            "nbc-sitcom"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "thursday-drama",
+          "title": "NBC Thursday Drama",
+          "days": [
+            4
+          ],
+          "startMinute": 1320,
+          "endMinute": 1380,
+          "tags": [
+            "nbc-drama",
+            "er"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "tonight",
+          "title": "The Tonight Show",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1415,
+          "endMinute": 1475,
+          "tags": [
+            "tonight-show",
+            "late-night"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "late-night",
+          "title": "Late Night",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1475,
+          "endMinute": 1535,
+          "tags": [
+            "late-night-conan",
+            "late-night"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "snl",
+          "title": "Saturday Night Live",
+          "days": [
+            6
+          ],
+          "startMinute": 1410,
+          "endMinute": 1500,
+          "tags": [
+            "snl",
+            "sketch-comedy"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "nbc",
+        "sitcom",
+        "drama"
+      ],
+      "fillerTags": [
+        "nbc-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "nbc 199*",
+        "nbc 1997 broadcast",
+        "must see tv nbc",
+        "tonight show 1995",
+        "saturday night live 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "must-see-sitcom",
+        "sitcom"
+      ]
+    },
+    {
+      "id": "ch-05-fox",
+      "number": 5,
+      "displayName": "FOX",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#C0392B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "fox-kids",
+          "title": "Fox Kids",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 900,
+          "endMinute": 1020,
+          "tags": [
+            "fox-kids",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "fox-kids-sat",
+          "title": "Fox Kids Saturday",
+          "days": [
+            6
+          ],
+          "startMinute": 480,
+          "endMinute": 720,
+          "tags": [
+            "fox-kids",
+            "cartoon",
+            "saturday-morning"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "nfl",
+          "title": "NFL on FOX",
+          "days": [
+            7
+          ],
+          "startMinute": 780,
+          "endMinute": 960,
+          "tags": [
+            "nfl",
+            "football"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "FOX Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "fox",
+            "animated-sitcom",
+            "sitcom",
+            "x-files"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "madtv",
+          "title": "MADtv",
+          "days": [
+            6
+          ],
+          "startMinute": 1380,
+          "endMinute": 1440,
+          "tags": [
+            "madtv",
+            "sketch-comedy"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "fox",
+        "sitcom",
+        "animated-sitcom"
+      ],
+      "fillerTags": [
+        "fox-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "fox 199*",
+        "fox kids 1995",
+        "fox 1998 broadcast",
+        "fox kids commercials"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "simpsons",
+        "x-files-paranormal",
+        "animated-sitcom"
+      ]
+    },
+    {
+      "id": "ch-06-upn",
+      "number": 6,
+      "displayName": "UPN",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#2E86C1",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "upn-kids",
+          "title": "UPN Kids",
+          "days": [
+            7
+          ],
+          "startMinute": 480,
+          "endMinute": 660,
+          "tags": [
+            "upn-kids",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "UPN Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "upn",
+            "star-trek",
+            "sci-fi"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "upn",
+        "syndicated",
+        "sitcom"
+      ],
+      "fillerTags": [
+        "upn-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "upn 199*",
+        "upn 1997",
+        "star trek voyager upn"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "star-trek",
+        "syndicated"
+      ]
+    },
+    {
+      "id": "ch-07-abc",
+      "number": 7,
+      "displayName": "ABC",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#1B1B1B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "gma",
+          "title": "Good Morning America",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 420,
+          "endMinute": 540,
+          "tags": [
+            "good-morning-america",
+            "morning-news"
+          ]
+        },
+        {
+          "id": "one-saturday-morning",
+          "title": "One Saturday Morning",
+          "days": [
+            6
+          ],
+          "startMinute": 480,
+          "endMinute": 720,
+          "tags": [
+            "one-saturday-morning",
+            "disney-cartoon",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "tgif",
+          "title": "TGIF",
+          "days": [
+            5
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "tgif",
+            "family-sitcom"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "20-20",
+          "title": "20/20",
+          "days": [
+            5
+          ],
+          "startMinute": 1320,
+          "endMinute": 1380,
+          "tags": [
+            "news-magazine",
+            "20-20"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "ABC Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1380,
+          "tags": [
+            "abc",
+            "drama",
+            "sitcom"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "nightline",
+          "title": "Nightline",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1415,
+          "endMinute": 1445,
+          "tags": [
+            "nightline",
+            "network-news"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "abc",
+        "sitcom",
+        "drama"
+      ],
+      "fillerTags": [
+        "abc-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "abc 199*",
+        "abc tgif",
+        "one saturday morning abc",
+        "abc 1993 broadcast"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "sitcom",
+        "tgif",
+        "drama"
+      ]
+    },
+    {
+      "id": "ch-08-the-wb",
+      "number": 8,
+      "displayName": "The WB",
+      "genre": "Network",
+      "categoryLabel": "NETWORK",
+      "color": "#8E44AD",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "kids-wb",
+          "title": "Kids' WB!",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 900,
+          "endMinute": 1020,
+          "tags": [
+            "kids-wb",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "kids-wb-sat",
+          "title": "Kids' WB! Saturday",
+          "days": [
+            6
+          ],
+          "startMinute": 480,
+          "endMinute": 720,
+          "tags": [
+            "kids-wb",
+            "cartoon",
+            "saturday-morning"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "WB Prime Time",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "the-wb",
+            "teen-drama"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "the-wb",
+        "teen-drama",
+        "sitcom"
+      ],
+      "fillerTags": [
+        "the-wb-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "the wb 199*",
+        "kids wb 1999",
+        "the wb 2001 broadcast"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "teen-drama",
+        "sitcom"
+      ]
+    },
+    {
+      "id": "ch-09-channel-9-independent",
+      "number": 9,
+      "displayName": "Channel 9 Independent",
+      "genre": "Local",
+      "categoryLabel": "LOCAL",
+      "color": "#E07B39",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "afternoon-cartoons",
+          "title": "Afternoon Cartoons",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 840,
+          "endMinute": 1020,
+          "tags": [
+            "syndicated-cartoon",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "movie",
+          "title": "Channel 9 Movie",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "movie",
+            "tv-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        },
+        {
+          "id": "late-movie",
+          "title": "The Late Movie",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1410,
+          "endMinute": 1530,
+          "tags": [
+            "b-movie",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "syndicated",
+        "classic-tv",
+        "local-tv"
+      ],
+      "fillerTags": [
+        "channel-9-independent-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "channel 9 independent 199*",
+        "independent station 1992 broadcast",
+        "local tv 1990s commercials",
+        "syndicated cartoons 1991"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "drive-in",
+        "syndicated-cartoon",
+        "b-movie"
+      ]
+    },
+    {
+      "id": "ch-10-public-access",
+      "number": 10,
+      "displayName": "Public Access",
+      "genre": "Community",
+      "categoryLabel": "COMMUNITY",
+      "color": "#A8DADC",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "public-access",
+        "local-tv"
+      ],
+      "fillerTags": [
+        "public-access-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "public access 199*",
+        "public access television 199*",
+        "cable access show 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "bob-ross",
+        "local-tv"
+      ]
+    },
+    {
+      "id": "ch-11-c-span",
+      "number": 11,
+      "displayName": "C-SPAN",
+      "genre": "Public Affairs",
+      "categoryLabel": "PUBLIC AFFAIRS",
+      "color": "#5D6D7E",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "c-span",
+        "politics"
+      ],
+      "fillerTags": [
+        "c-span-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "c-span 199*",
+        "c-span 1995",
+        "c-span 2000"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary"
+      ]
+    },
+    {
+      "id": "ch-12-qvc",
+      "number": 12,
+      "displayName": "QVC",
+      "genre": "Shopping",
+      "categoryLabel": "SHOPPING",
+      "color": "#16A085",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "qvc",
+        "shopping"
+      ],
+      "fillerTags": [
+        "qvc-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "qvc 199*",
+        "qvc 1996",
+        "qvc 2002"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "shopping",
+        "hsn"
+      ]
+    },
+    {
+      "id": "ch-13-home-shopping-network",
+      "number": 13,
+      "displayName": "Home Shopping Network",
+      "genre": "Shopping",
+      "categoryLabel": "SHOPPING",
+      "color": "#D35400",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "hsn",
+        "shopping",
+        "infomercial"
+      ],
+      "fillerTags": [
+        "home-shopping-network-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "home shopping network 199*",
+        "home shopping network 1990s",
+        "infomercial 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "shopping",
+        "qvc"
+      ]
+    },
+    {
+      "id": "ch-14-the-weather-channel",
+      "number": 14,
+      "displayName": "The Weather Channel",
+      "genre": "Weather",
+      "categoryLabel": "WEATHER",
+      "color": "#48CAE4",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "weather-channel",
+        "weather"
+      ],
+      "fillerTags": [
+        "the-weather-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "the weather channel 199*",
+        "weather channel 1995",
+        "weather channel local on the 8s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "weather",
+        "documentary"
+      ]
+    },
+    {
+      "id": "ch-15-cnn",
+      "number": 15,
+      "displayName": "CNN",
+      "genre": "News",
+      "categoryLabel": "NEWS",
+      "color": "#C0392B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "larry-king",
+          "title": "Larry King Live",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1260,
+          "endMinute": 1320,
+          "tags": [
+            "larry-king",
+            "talk"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "cnn",
+        "news"
+      ],
+      "fillerTags": [
+        "cnn-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "cnn 199*",
+        "cnn 1991 broadcast",
+        "cnn 2000"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "news",
+        "headline-news"
+      ]
+    },
+    {
+      "id": "ch-16-headline-news",
+      "number": 16,
+      "displayName": "Headline News",
+      "genre": "News",
+      "categoryLabel": "NEWS",
+      "color": "#A93226",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "headline-news",
+        "news"
+      ],
+      "fillerTags": [
+        "headline-news-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "headline news 199*",
+        "headline news 1995",
+        "cnn headline news 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "news",
+        "cnn"
+      ]
+    },
+    {
+      "id": "ch-17-espn",
+      "number": 17,
+      "displayName": "ESPN",
+      "genre": "Sports",
+      "categoryLabel": "SPORTS",
+      "color": "#E74C3C",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "sportscenter",
+          "title": "SportsCenter",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1380,
+          "endMinute": 1440,
+          "tags": [
+            "sportscenter"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "espn",
+        "sports"
+      ],
+      "fillerTags": [
+        "espn-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "espn 199*",
+        "espn 1996",
+        "sportscenter 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "sports",
+        "espn2",
+        "wrestling-classics"
+      ]
+    },
+    {
+      "id": "ch-18-espn2",
+      "number": 18,
+      "displayName": "ESPN2",
+      "genre": "Sports",
+      "categoryLabel": "SPORTS",
+      "color": "#CB4335",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "espn2",
+        "extreme-sports",
+        "sports"
+      ],
+      "fillerTags": [
+        "espn2-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "espn2 199*",
+        "espn2 1994",
+        "x games 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "sports",
+        "espn",
+        "wrestling-classics"
+      ]
+    },
+    {
+      "id": "ch-19-tbs",
+      "number": 19,
+      "displayName": "TBS",
+      "genre": "Superstation",
+      "categoryLabel": "SUPERSTATION",
+      "color": "#2471A3",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "wcw-saturday",
+          "title": "WCW Saturday Night",
+          "days": [
+            6
+          ],
+          "startMinute": 1085,
+          "endMinute": 1205,
+          "tags": [
+            "wcw",
+            "wrestling"
+          ]
+        },
+        {
+          "id": "dinner-and-a-movie",
+          "title": "Dinner and a Movie",
+          "days": [
+            5
+          ],
+          "startMinute": 1205,
+          "endMinute": 1385,
+          "tags": [
+            "dinner-and-a-movie",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "tbs",
+        "classic-sitcom",
+        "sitcom",
+        "movie"
+      ],
+      "fillerTags": [
+        "tbs-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "tbs 199*",
+        "tbs superstation 1995",
+        "wcw saturday night"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "sitcom",
+        "classic-sitcom",
+        "movie",
+        "wrestling-classics"
+      ]
+    },
+    {
+      "id": "ch-20-tnt",
+      "number": 20,
+      "displayName": "TNT",
+      "genre": "Movies & Drama",
+      "categoryLabel": "MOVIES & DRAMA",
+      "color": "#D4AC0D",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "nitro",
+          "title": "WCW Monday Nitro",
+          "days": [
+            1
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "wcw-nitro",
+            "wrestling"
+          ]
+        },
+        {
+          "id": "tnt-movie",
+          "title": "TNT Movie",
+          "days": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "tnt",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "tnt",
+        "movie",
+        "drama"
+      ],
+      "fillerTags": [
+        "tnt-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "tnt 199*",
+        "tnt 1997 broadcast",
+        "wcw monday nitro"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "movie",
+        "drama",
+        "wrestling-classics"
+      ]
+    },
+    {
+      "id": "ch-21-usa-network",
+      "number": 21,
+      "displayName": "USA Network",
+      "genre": "Entertainment",
+      "categoryLabel": "ENTERTAINMENT",
+      "color": "#1F618D",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "cartoon-express",
+          "title": "USA Cartoon Express",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 420,
+          "endMinute": 600,
+          "tags": [
+            "usa-cartoon-express",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "raw",
+          "title": "WWF Monday Night Raw",
+          "days": [
+            1
+          ],
+          "startMinute": 1260,
+          "endMinute": 1380,
+          "tags": [
+            "wwf",
+            "raw",
+            "wrestling"
+          ]
+        },
+        {
+          "id": "up-all-night",
+          "title": "USA Up All Night",
+          "days": [
+            5,
+            6
+          ],
+          "startMinute": 1380,
+          "endMinute": 1740,
+          "tags": [
+            "up-all-night",
+            "b-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "usa-network",
+        "drama",
+        "syndicated"
+      ],
+      "fillerTags": [
+        "usa-network-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "usa network 199*",
+        "usa network 1993",
+        "usa cartoon express",
+        "usa up all night"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "drama",
+        "syndicated",
+        "cartoon"
+      ]
+    },
+    {
+      "id": "ch-22-a-e",
+      "number": 22,
+      "displayName": "A&E",
+      "genre": "Arts & Entertainment",
+      "categoryLabel": "ARTS & ENTERTAINMENT",
+      "color": "#7D3C98",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "biography",
+          "title": "Biography",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1260,
+          "tags": [
+            "biography"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "a-and-e",
+        "documentary",
+        "drama",
+        "mystery"
+      ],
+      "fillerTags": [
+        "a-e-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "a&e 199*",
+        "a&e 1995 broadcast",
+        "biography a&e 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "x-files-paranormal"
+      ]
+    },
+    {
+      "id": "ch-23-discovery-channel",
+      "number": 23,
+      "displayName": "Discovery Channel",
+      "genre": "Documentary",
+      "categoryLabel": "DOCUMENTARY",
+      "color": "#1E8449",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "discovery",
+        "documentary",
+        "nature"
+      ],
+      "fillerTags": [
+        "discovery-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "discovery channel 199*",
+        "discovery channel 1996",
+        "shark week 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "nature"
+      ]
+    },
+    {
+      "id": "ch-24-tlc",
+      "number": 24,
+      "displayName": "TLC",
+      "genre": "Learning",
+      "categoryLabel": "LEARNING",
+      "color": "#AF601A",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "ready-set-learn",
+          "title": "Ready Set Learn",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 360,
+          "endMinute": 720,
+          "tags": [
+            "ready-set-learn",
+            "educational-kids"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "tlc",
+        "documentary",
+        "home"
+      ],
+      "fillerTags": [
+        "tlc-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "tlc 199*",
+        "the learning channel 1995",
+        "tlc 1999"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "home"
+      ]
+    },
+    {
+      "id": "ch-25-the-history-channel",
+      "number": 25,
+      "displayName": "The History Channel",
+      "genre": "History",
+      "categoryLabel": "HISTORY",
+      "color": "#7B6F4B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "history-channel",
+        "documentary",
+        "history"
+      ],
+      "fillerTags": [
+        "the-history-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "the history channel 199*",
+        "history channel 1997"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "x-files-paranormal"
+      ]
+    },
+    {
+      "id": "ch-26-nickelodeon",
+      "number": 26,
+      "displayName": "Nickelodeon",
+      "genre": "Kids",
+      "categoryLabel": "KIDS",
+      "color": "#FF7F00",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "nick-jr",
+          "title": "Nick Jr.",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 540,
+          "endMinute": 840,
+          "tags": [
+            "nick-jr",
+            "preschool"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "nicktoons",
+          "title": "Nicktoons",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 840,
+          "endMinute": 1200,
+          "tags": [
+            "nicktoons",
+            "nickelodeon",
+            "cartoon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "snick",
+          "title": "SNICK",
+          "days": [
+            6
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "snick",
+            "nickelodeon"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "nick-at-nite",
+          "title": "Nick at Nite",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1800,
+          "tags": [
+            "nick-at-nite",
+            "classic-sitcom",
+            "classic-tv"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "nick-at-nite-sat",
+          "title": "Nick at Nite",
+          "days": [
+            6
+          ],
+          "startMinute": 1320,
+          "endMinute": 1800,
+          "tags": [
+            "nick-at-nite",
+            "classic-sitcom",
+            "classic-tv"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "nickelodeon",
+        "kids"
+      ],
+      "fillerTags": [
+        "nickelodeon-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "nickelodeon 199*",
+        "nickelodeon 1994",
+        "snick 1995",
+        "nick at nite 1990s",
+        "nickelodeon commercials 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "nicktoons-classic",
+        "kid-horror",
+        "classic-sitcom"
+      ]
+    },
+    {
+      "id": "ch-27-cartoon-network",
+      "number": 27,
+      "displayName": "Cartoon Network",
+      "genre": "Cartoons",
+      "categoryLabel": "CARTOONS",
+      "color": "#000000",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "boomerang",
+          "title": "Boomerang",
+          "days": [
+            6,
+            7
+          ],
+          "startMinute": 360,
+          "endMinute": 480,
+          "tags": [
+            "boomerang",
+            "classic-cartoon",
+            "hanna-barbera"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "toonami",
+          "title": "Toonami",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 960,
+          "endMinute": 1080,
+          "tags": [
+            "toonami",
+            "anime"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "cartoon-cartoon-fridays",
+          "title": "Cartoon Cartoon Fridays",
+          "days": [
+            5
+          ],
+          "startMinute": 1140,
+          "endMinute": 1260,
+          "tags": [
+            "cartoon-cartoons",
+            "cartoon-network-original"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "toonami-saturday",
+          "title": "Toonami Saturday Night",
+          "days": [
+            6
+          ],
+          "startMinute": 1140,
+          "endMinute": 1380,
+          "tags": [
+            "toonami",
+            "anime"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "adult-swim",
+          "title": "Adult Swim",
+          "days": [
+            7,
+            1,
+            2,
+            3,
+            4
+          ],
+          "startMinute": 1380,
+          "endMinute": 1740,
+          "tags": [
+            "adult-swim"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "cartoon-network",
+        "cartoon",
+        "hanna-barbera",
+        "looney-tunes"
+      ],
+      "fillerTags": [
+        "cartoon-network-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "cartoon network 199*",
+        "cartoon network 1998",
+        "toonami",
+        "toonami 2000",
+        "adult swim 2003",
+        "cartoon network bumpers",
+        "cartoon cartoon fridays"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "toonami-adult-swim",
+        "anime-classics",
+        "dc-animated",
+        "saturday-morning-classics"
+      ]
+    },
+    {
+      "id": "ch-28-disney-channel",
+      "number": 28,
+      "displayName": "Disney Channel",
+      "genre": "Family",
+      "categoryLabel": "FAMILY",
+      "color": "#2874A6",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "playhouse-disney",
+          "title": "Playhouse Disney",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 420,
+          "endMinute": 720,
+          "tags": [
+            "playhouse-disney",
+            "preschool"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "dcom",
+          "title": "Disney Channel Original Movie",
+          "days": [
+            5
+          ],
+          "startMinute": 1140,
+          "endMinute": 1260,
+          "tags": [
+            "dcom",
+            "disney-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        },
+        {
+          "id": "zoog-disney",
+          "title": "Zoog Disney",
+          "days": [
+            6,
+            7
+          ],
+          "startMinute": 1080,
+          "endMinute": 1260,
+          "tags": [
+            "zoog-disney",
+            "disney-channel-original"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "disney-channel",
+        "disney",
+        "kids"
+      ],
+      "fillerTags": [
+        "disney-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "disney channel 199*",
+        "disney channel 1999",
+        "zoog disney",
+        "disney channel 1990s commercials"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "disney-afternoon",
+        "disney-movie"
+      ]
+    },
+    {
+      "id": "ch-29-comedy-central",
+      "number": 29,
+      "displayName": "Comedy Central",
+      "genre": "Comedy",
+      "categoryLabel": "COMEDY",
+      "color": "#F5B041",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "mst3k",
+          "title": "Mystery Science Theater 3000",
+          "days": [
+            6
+          ],
+          "startMinute": 600,
+          "endMinute": 720,
+          "tags": [
+            "mst3k"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "snl-classics",
+          "title": "Saturday Night Live Classics",
+          "days": [
+            6
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "snl",
+            "sketch-comedy"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "south-park",
+          "title": "South Park",
+          "days": [
+            3
+          ],
+          "startMinute": 1320,
+          "endMinute": 1350,
+          "tags": [
+            "south-park"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "daily-show",
+          "title": "The Daily Show",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1380,
+          "endMinute": 1410,
+          "tags": [
+            "daily-show"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "standup",
+          "title": "Comedy Central Presents",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1440,
+          "endMinute": 1560,
+          "tags": [
+            "standup",
+            "comedy-central-presents"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "comedy-central",
+        "comedy",
+        "sketch-comedy",
+        "standup"
+      ],
+      "fillerTags": [
+        "comedy-central-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "comedy central 199*",
+        "comedy central 1997",
+        "comedy central 2002",
+        "comedy central presents"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "sketch-comedy",
+        "standup",
+        "mst3k",
+        "simpsons"
+      ]
+    },
+    {
+      "id": "ch-30-mtv",
+      "number": 30,
+      "displayName": "MTV",
+      "genre": "Music",
+      "categoryLabel": "MUSIC",
+      "color": "#E04848",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "trl",
+          "title": "Total Request Live",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 930,
+          "endMinute": 990,
+          "tags": [
+            "trl",
+            "music-video"
+          ]
+        },
+        {
+          "id": "yo-mtv-raps",
+          "title": "Yo! MTV Raps",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 990,
+          "endMinute": 1050,
+          "tags": [
+            "yo-mtv-raps",
+            "hip-hop"
+          ]
+        },
+        {
+          "id": "unplugged",
+          "title": "MTV Unplugged",
+          "days": [
+            5
+          ],
+          "startMinute": 1260,
+          "endMinute": 1320,
+          "tags": [
+            "unplugged",
+            "live-music"
+          ]
+        },
+        {
+          "id": "real-world",
+          "title": "The Real World",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1320,
+          "endMinute": 1380,
+          "tags": [
+            "real-world",
+            "road-rules",
+            "mtv-original"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "mtv-animation",
+          "title": "MTV Animation",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1380,
+          "endMinute": 1410,
+          "tags": [
+            "beavis-and-butthead",
+            "daria",
+            "mtv-animation"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "headbangers-ball",
+          "title": "Headbangers Ball",
+          "days": [
+            6
+          ],
+          "startMinute": 1440,
+          "endMinute": 1620,
+          "tags": [
+            "headbangers-ball",
+            "metal"
+          ]
+        },
+        {
+          "id": "120-minutes",
+          "title": "120 Minutes",
+          "days": [
+            7
+          ],
+          "startMinute": 1440,
+          "endMinute": 1560,
+          "tags": [
+            "120-minutes",
+            "alternative"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "mtv",
+        "music-video",
+        "pop"
+      ],
+      "fillerTags": [
+        "mtv-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "mtv 199*",
+        "mtv 1992 broadcast",
+        "mtv 1999 broadcast",
+        "mtv commercials 1990s",
+        "total request live",
+        "120 minutes mtv"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "music-video",
+        "mtv-animation"
+      ]
+    },
+    {
+      "id": "ch-31-vh1",
+      "number": 31,
+      "displayName": "VH1",
+      "genre": "Music",
+      "categoryLabel": "MUSIC",
+      "color": "#9B59B6",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "countdown",
+          "title": "VH1 Top 20 Countdown",
+          "days": [
+            6
+          ],
+          "startMinute": 600,
+          "endMinute": 720,
+          "tags": [
+            "vh1-countdown"
+          ]
+        },
+        {
+          "id": "pop-up-video",
+          "title": "Pop-Up Video",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1140,
+          "endMinute": 1200,
+          "tags": [
+            "pop-up-video"
+          ]
+        },
+        {
+          "id": "behind-the-music",
+          "title": "Behind the Music",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1260,
+          "endMinute": 1320,
+          "tags": [
+            "behind-the-music"
+          ]
+        },
+        {
+          "id": "storytellers",
+          "title": "VH1 Storytellers",
+          "days": [
+            6
+          ],
+          "startMinute": 1320,
+          "endMinute": 1380,
+          "tags": [
+            "storytellers",
+            "live-music"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "vh1",
+        "music-video",
+        "classic-rock",
+        "adult-contemporary"
+      ],
+      "fillerTags": [
+        "vh1-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "vh1 199*",
+        "vh1 1997 broadcast",
+        "pop up video vh1",
+        "behind the music"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "music-video",
+        "behind-the-music"
+      ]
+    },
+    {
+      "id": "ch-32-bet",
+      "number": 32,
+      "displayName": "BET",
+      "genre": "Music",
+      "categoryLabel": "MUSIC",
+      "color": "#B9770E",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "rap-city",
+          "title": "Rap City",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1020,
+          "endMinute": 1080,
+          "tags": [
+            "rap-city",
+            "hip-hop"
+          ]
+        },
+        {
+          "id": "video-soul",
+          "title": "Video Soul",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1080,
+          "endMinute": 1140,
+          "tags": [
+            "video-soul",
+            "r-and-b"
+          ]
+        },
+        {
+          "id": "comic-view",
+          "title": "BET Comic View",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1320,
+          "endMinute": 1380,
+          "tags": [
+            "comic-view",
+            "standup"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "bet",
+        "r-and-b",
+        "hip-hop",
+        "music-video"
+      ],
+      "fillerTags": [
+        "bet-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "bet 199*",
+        "bet 1995 broadcast",
+        "rap city bet"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "music-video",
+        "hip-hop"
+      ]
+    },
+    {
+      "id": "ch-33-cmt",
+      "number": 33,
+      "displayName": "CMT",
+      "genre": "Country",
+      "categoryLabel": "COUNTRY",
+      "color": "#A04000",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "cmt",
+        "country",
+        "music-video"
+      ],
+      "fillerTags": [
+        "cmt-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "cmt 199*",
+        "cmt 1996",
+        "country music television 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "music-video"
+      ]
+    },
+    {
+      "id": "ch-34-sci-fi-channel",
+      "number": 34,
+      "displayName": "Sci-Fi Channel",
+      "genre": "Sci-Fi",
+      "categoryLabel": "SCI-FI",
+      "color": "#4FD1A5",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "saturday-anime",
+          "title": "Saturday Anime",
+          "days": [
+            6
+          ],
+          "startMinute": 540,
+          "endMinute": 660,
+          "tags": [
+            "anime"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "mst3k",
+          "title": "Mystery Science Theater 3000",
+          "days": [
+            6
+          ],
+          "startMinute": 660,
+          "endMinute": 780,
+          "tags": [
+            "mst3k"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "prime",
+          "title": "Sci-Fi Prime",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "sci-fi",
+            "star-trek",
+            "x-files"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "creature-features",
+          "title": "Creature Features",
+          "days": [
+            5,
+            6
+          ],
+          "startMinute": 1380,
+          "endMinute": 1500,
+          "tags": [
+            "b-movie",
+            "horror-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "scifi-channel",
+        "sci-fi",
+        "classic-scifi"
+      ],
+      "fillerTags": [
+        "sci-fi-channel-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "sci-fi channel 199*",
+        "sci-fi channel 1995",
+        "scifi channel 2001"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "star-trek",
+        "x-files-paranormal",
+        "kaiju",
+        "drive-in"
+      ]
+    },
+    {
+      "id": "ch-35-tv-land",
+      "number": 35,
+      "displayName": "TV Land",
+      "genre": "Classic Tv",
+      "categoryLabel": "CLASSIC TV",
+      "color": "#F1C40F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "tv-land",
+        "classic-tv",
+        "classic-sitcom"
+      ],
+      "fillerTags": [
+        "tv-land-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "tv land 199*",
+        "tv land 1997",
+        "tv land retromercials"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "classic-sitcom",
+        "classic-tv",
+        "must-see-sitcom"
+      ]
+    },
+    {
+      "id": "ch-36-e",
+      "number": 36,
+      "displayName": "E!",
+      "genre": "Entertainment",
+      "categoryLabel": "ENTERTAINMENT",
+      "color": "#EC7063",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "talk-soup",
+          "title": "Talk Soup",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "startMinute": 1140,
+          "endMinute": 1170,
+          "tags": [
+            "talk-soup"
+          ]
+        },
+        {
+          "id": "true-hollywood-story",
+          "title": "E! True Hollywood Story",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1260,
+          "endMinute": 1320,
+          "tags": [
+            "true-hollywood-story"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "e-entertainment",
+        "entertainment-news"
+      ],
+      "fillerTags": [
+        "e-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "e! 199*",
+        "e! entertainment television 1996",
+        "talk soup"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "entertainment-news",
+        "documentary"
+      ]
+    },
+    {
+      "id": "ch-37-lifetime",
+      "number": 37,
+      "displayName": "Lifetime",
+      "genre": "Women",
+      "categoryLabel": "WOMEN",
+      "color": "#C0392B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "lifetime-movie",
+          "title": "Lifetime Movie",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "lifetime",
+            "tv-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "lifetime",
+        "drama"
+      ],
+      "fillerTags": [
+        "lifetime-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "lifetime 199*",
+        "lifetime television 1995"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "tv-movie",
+        "drama",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-38-food-network",
+      "number": 38,
+      "displayName": "Food Network",
+      "genre": "Food",
+      "categoryLabel": "FOOD",
+      "color": "#E67E22",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "food-network",
+        "cooking"
+      ],
+      "fillerTags": [
+        "food-network-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "food network 199*",
+        "food network 1997",
+        "tv food network"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "cooking",
+        "home"
+      ]
+    },
+    {
+      "id": "ch-39-hgtv",
+      "number": 39,
+      "displayName": "HGTV",
+      "genre": "Home",
+      "categoryLabel": "HOME",
+      "color": "#27AE60",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "hgtv",
+        "home",
+        "gardening"
+      ],
+      "fillerTags": [
+        "hgtv-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "hgtv 199*",
+        "hgtv 1998"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "home",
+        "cooking"
+      ]
+    },
+    {
+      "id": "ch-40-amc",
+      "number": 40,
+      "displayName": "AMC",
+      "genre": "Classic Movies",
+      "categoryLabel": "CLASSIC MOVIES",
+      "color": "#B03A2E",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "amc-movies",
+          "title": "American Movie Classics",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 360,
+          "endMinute": 1800,
+          "tags": [
+            "amc",
+            "classic-movie",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "amc",
+        "classic-movie",
+        "movie"
+      ],
+      "fillerTags": [
+        "amc-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "amc 199*",
+        "american movie classics 1995",
+        "amc 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "classic-movie",
+        "movie",
+        "drive-in"
+      ]
+    },
+    {
+      "id": "ch-41-tcm",
+      "number": 41,
+      "displayName": "TCM",
+      "genre": "Classic Movies",
+      "categoryLabel": "CLASSIC MOVIES",
+      "color": "#5B2C6F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "tcm-movies",
+          "title": "TCM Presents",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 360,
+          "endMinute": 1800,
+          "tags": [
+            "tcm",
+            "classic-movie",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "tcm",
+        "classic-movie"
+      ],
+      "fillerTags": [
+        "tcm-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "tcm 199*",
+        "turner classic movies 1996"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "classic-movie",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-42-fx",
+      "number": 42,
+      "displayName": "FX",
+      "genre": "Entertainment",
+      "categoryLabel": "ENTERTAINMENT",
+      "color": "#212F3D",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "fx-movie",
+          "title": "FX Movie",
+          "days": [
+            5,
+            6
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "fx",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "fx",
+        "syndicated",
+        "sitcom",
+        "drama"
+      ],
+      "fillerTags": [
+        "fx-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "fx 199*",
+        "fx network 1995",
+        "fx 2002"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "simpsons",
+        "x-files-paranormal",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-43-court-tv",
+      "number": 43,
+      "displayName": "Court TV",
+      "genre": "Trials",
+      "categoryLabel": "TRIALS",
+      "color": "#566573",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "court-tv"
+      ],
+      "fillerTags": [
+        "court-tv-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "court tv 199*",
+        "court tv 1995"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "documentary",
+        "news"
+      ]
+    },
+    {
+      "id": "ch-44-animal-planet",
+      "number": 44,
+      "displayName": "Animal Planet",
+      "genre": "Animals",
+      "categoryLabel": "ANIMALS",
+      "color": "#229954",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "animal-planet",
+        "nature"
+      ],
+      "fillerTags": [
+        "animal-planet-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "animal planet 199*",
+        "animal planet 1997"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "nature",
+        "documentary"
+      ]
+    },
+    {
+      "id": "ch-45-hbo",
+      "number": 45,
+      "displayName": "HBO",
+      "genre": "Premium",
+      "categoryLabel": "PREMIUM",
+      "color": "#17202A",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "feature",
+          "title": "HBO Feature Presentation",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "hbo",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        },
+        {
+          "id": "tales-from-the-crypt",
+          "title": "Tales from the Crypt",
+          "days": [
+            6
+          ],
+          "startMinute": 1320,
+          "endMinute": 1350,
+          "tags": [
+            "tales-from-the-crypt"
+          ],
+          "preferTypes": [
+            "EPISODE"
+          ]
+        },
+        {
+          "id": "hbo-comedy",
+          "title": "HBO Comedy Hour",
+          "days": [
+            5
+          ],
+          "startMinute": 1380,
+          "endMinute": 1440,
+          "tags": [
+            "hbo-comedy",
+            "standup"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "hbo",
+        "movie",
+        "hbo-original"
+      ],
+      "fillerTags": [
+        "hbo-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "hbo 199*",
+        "hbo 1993",
+        "hbo feature presentation",
+        "hbo intro 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "blockbuster-movie",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-46-cinemax",
+      "number": 46,
+      "displayName": "Cinemax",
+      "genre": "Premium",
+      "categoryLabel": "PREMIUM",
+      "color": "#922B21",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "cinemax-movie",
+          "title": "Cinemax Movie",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1440,
+          "tags": [
+            "cinemax",
+            "movie",
+            "action-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "cinemax",
+        "movie",
+        "action-movie"
+      ],
+      "fillerTags": [
+        "cinemax-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "cinemax 199*",
+        "cinemax 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "blockbuster-movie",
+        "action-movie",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-47-showtime",
+      "number": 47,
+      "displayName": "Showtime",
+      "genre": "Premium",
+      "categoryLabel": "PREMIUM",
+      "color": "#A93226",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "showtime-movie",
+          "title": "Showtime Movie",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1200,
+          "endMinute": 1320,
+          "tags": [
+            "showtime",
+            "movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "showtime",
+        "movie",
+        "showtime-original"
+      ],
+      "fillerTags": [
+        "showtime-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "showtime 199*",
+        "showtime 1990s"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": [
+        "blockbuster-movie",
+        "movie"
+      ]
+    },
+    {
+      "id": "ch-48-the-bridge",
+      "number": 48,
+      "displayName": "The Bridge",
+      "genre": "Star Trek 24/7",
+      "categoryLabel": "STAR TREK 24/7",
+      "color": "#3F7FBF",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "trek-movie",
+          "title": "Star Trek Movie Night",
+          "days": [
+            5,
+            6
+          ],
+          "startMinute": 1200,
+          "endMinute": 1350,
+          "tags": [
+            "star-trek-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "star-trek",
+        "star-trek-tng",
+        "star-trek-ds9",
+        "star-trek-voyager"
+      ],
+      "fillerTags": [
+        "the-bridge-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "star trek next generation",
+        "star trek deep space nine",
+        "star trek voyager",
+        "star trek original series",
+        "star trek enterprise"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "sci-fi"
+      ]
+    },
+    {
+      "id": "ch-49-galaxy-far-away",
+      "number": 49,
+      "displayName": "Galaxy Far Away",
+      "genre": "Star Wars 24/7",
+      "categoryLabel": "STAR WARS 24/7",
+      "color": "#FFE81F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [
+        {
+          "id": "saga",
+          "title": "The Saga",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "startMinute": 1140,
+          "endMinute": 1500,
+          "tags": [
+            "star-wars-movie"
+          ],
+          "preferTypes": [
+            "MOVIE"
+          ]
+        }
+      ],
+      "defaultTags": [
+        "star-wars"
+      ],
+      "fillerTags": [
+        "galaxy-far-away-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "star wars",
+        "star wars clone wars",
+        "star wars droids ewoks cartoon"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "star-wars-movie"
+      ]
+    },
+    {
+      "id": "ch-50-sacred-heart",
+      "number": 50,
+      "displayName": "Sacred Heart",
+      "genre": "Scrubs 24/7",
+      "categoryLabel": "SCRUBS 24/7",
+      "color": "#4CB5AE",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "scrubs"
+      ],
+      "fillerTags": [
+        "sacred-heart-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "scrubs"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "must-see-sitcom",
+        "thursday-2000s"
+      ]
+    },
+    {
+      "id": "ch-51-the-disney-vault",
+      "number": 51,
+      "displayName": "The Disney Vault",
+      "genre": "Disney Movies",
+      "categoryLabel": "DISNEY MOVIES",
+      "color": "#1E3F8F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "disney-movie"
+      ],
+      "fillerTags": [
+        "the-disney-vault-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "disney movie",
+        "walt disney animated",
+        "disney channel original movie"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "disney-afternoon"
+      ]
+    },
+    {
+      "id": "ch-52-disney-afternoon",
+      "number": 52,
+      "displayName": "Disney Afternoon",
+      "genre": "Cartoons",
+      "categoryLabel": "CARTOONS",
+      "color": "#E8483B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "disney-afternoon"
+      ],
+      "fillerTags": [
+        "disney-afternoon-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "ducktales",
+        "darkwing duck",
+        "gargoyles",
+        "talespin",
+        "chip n dale rescue rangers",
+        "goof troop"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "disney-movie",
+        "saturday-morning-classics"
+      ]
+    },
+    {
+      "id": "ch-53-springfield",
+      "number": 53,
+      "displayName": "Springfield",
+      "genre": "Simpsons 24/7",
+      "categoryLabel": "SIMPSONS 24/7",
+      "color": "#FFD90F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "simpsons"
+      ],
+      "fillerTags": [
+        "springfield-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "the simpsons"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "animated-sitcom"
+      ]
+    },
+    {
+      "id": "ch-54-must-see-24-7",
+      "number": 54,
+      "displayName": "Must See 24/7",
+      "genre": "Sitcoms",
+      "categoryLabel": "SITCOMS",
+      "color": "#9B2335",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "must-see-sitcom"
+      ],
+      "fillerTags": [
+        "must-see-24-7-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "seinfeld",
+        "friends",
+        "frasier",
+        "cheers",
+        "fresh prince"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "thursday-2000s",
+        "sitcom"
+      ]
+    },
+    {
+      "id": "ch-55-the-truth-is-out-there",
+      "number": 55,
+      "displayName": "The Truth Is Out There",
+      "genre": "Paranormal",
+      "categoryLabel": "PARANORMAL",
+      "color": "#2E4A2E",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "x-files-paranormal"
+      ],
+      "fillerTags": [
+        "the-truth-is-out-there-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "x-files",
+        "twilight zone",
+        "outer limits",
+        "unsolved mysteries",
+        "in search of"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "sci-fi"
+      ]
+    },
+    {
+      "id": "ch-56-saturday-morning",
+      "number": 56,
+      "displayName": "Saturday Morning",
+      "genre": "Cartoons 24/7",
+      "categoryLabel": "CARTOONS 24/7",
+      "color": "#FF6F3C",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "saturday-morning-classics"
+      ],
+      "fillerTags": [
+        "saturday-morning-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "he-man",
+        "transformers",
+        "g.i. joe",
+        "teenage mutant ninja turtles",
+        "thundercats",
+        "real ghostbusters"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "cartoon",
+        "marvel-animated"
+      ]
+    },
+    {
+      "id": "ch-57-anime-2000",
+      "number": 57,
+      "displayName": "Anime 2000",
+      "genre": "Anime",
+      "categoryLabel": "ANIME",
+      "color": "#E63973",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "anime-classics"
+      ],
+      "fillerTags": [
+        "anime-2000-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "dragon ball z",
+        "sailor moon",
+        "pokemon",
+        "cowboy bebop",
+        "yu yu hakusho",
+        "gundam wing"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "toonami"
+      ]
+    },
+    {
+      "id": "ch-58-midnight-toonami",
+      "number": 58,
+      "displayName": "Midnight Toonami",
+      "genre": "Toonami & Adult Swim",
+      "categoryLabel": "TOONAMI & ADULT SWIM",
+      "color": "#1B998B",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "toonami-adult-swim"
+      ],
+      "fillerTags": [
+        "midnight-toonami-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "toonami",
+        "adult swim",
+        "aqua teen hunger force",
+        "space ghost coast to coast"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "anime-classics",
+        "toonami",
+        "adult-swim"
+      ]
+    },
+    {
+      "id": "ch-59-monday-night-wars",
+      "number": 59,
+      "displayName": "Monday Night Wars",
+      "genre": "Wrestling",
+      "categoryLabel": "WRESTLING",
+      "color": "#B22222",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "wrestling-classics"
+      ],
+      "fillerTags": [
+        "monday-night-wars-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "wcw nitro",
+        "wwf raw",
+        "ecw",
+        "wcw",
+        "wwf"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "wrestling"
+      ]
+    },
+    {
+      "id": "ch-60-satellite-of-love",
+      "number": 60,
+      "displayName": "Satellite of Love",
+      "genre": "Mst3K 24/7",
+      "categoryLabel": "MST3K 24/7",
+      "color": "#7A4FBF",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "mst3k"
+      ],
+      "fillerTags": [
+        "satellite-of-love-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "mystery science theater 3000",
+        "mst3k"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "drive-in"
+      ]
+    },
+    {
+      "id": "ch-61-drive-in",
+      "number": 61,
+      "displayName": "Drive-In",
+      "genre": "B-Movies & Horror",
+      "categoryLabel": "B-MOVIES & HORROR",
+      "color": "#5A1E1E",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "drive-in"
+      ],
+      "fillerTags": [
+        "drive-in-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "horror movie",
+        "b-movie",
+        "sci-fi movie 1950s"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "kaiju",
+        "b-movie",
+        "horror-movie"
+      ]
+    },
+    {
+      "id": "ch-62-gotham",
+      "number": 62,
+      "displayName": "Gotham",
+      "genre": "Dc Animated",
+      "categoryLabel": "DC ANIMATED",
+      "color": "#2B2D42",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "dc-animated"
+      ],
+      "fillerTags": [
+        "gotham-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "batman animated series",
+        "superman animated series",
+        "justice league",
+        "batman beyond"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "marvel-animated"
+      ]
+    },
+    {
+      "id": "ch-63-marvel-toons",
+      "number": 63,
+      "displayName": "Marvel Toons",
+      "genre": "Marvel Animated",
+      "categoryLabel": "MARVEL ANIMATED",
+      "color": "#C1121F",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "marvel-animated"
+      ],
+      "fillerTags": [
+        "marvel-toons-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "x-men animated series",
+        "spider-man animated series",
+        "fantastic four animated",
+        "iron man animated"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "dc-animated"
+      ]
+    },
+    {
+      "id": "ch-64-nicktoons-24",
+      "number": 64,
+      "displayName": "Nicktoons 24",
+      "genre": "Nicktoons",
+      "categoryLabel": "NICKTOONS",
+      "color": "#FF7F00",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "nicktoons-classic"
+      ],
+      "fillerTags": [
+        "nicktoons-24-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "rugrats",
+        "ren and stimpy",
+        "rocko's modern life",
+        "hey arnold",
+        "spongebob",
+        "doug nickelodeon"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "nicktoons",
+        "nickelodeon"
+      ]
+    },
+    {
+      "id": "ch-65-midnight-society",
+      "number": 65,
+      "displayName": "Midnight Society",
+      "genre": "Spooky Kids Tv",
+      "categoryLabel": "SPOOKY KIDS TV",
+      "color": "#3D2C8D",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "kid-horror"
+      ],
+      "fillerTags": [
+        "midnight-society-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "are you afraid of the dark",
+        "goosebumps",
+        "eerie indiana",
+        "tales from the crypt"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "x-files-paranormal"
+      ]
+    },
+    {
+      "id": "ch-66-happy-little-trees",
+      "number": 66,
+      "displayName": "Happy Little Trees",
+      "genre": "Bob Ross 24/7",
+      "categoryLabel": "BOB ROSS 24/7",
+      "color": "#5B8C5A",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "bob-ross"
+      ],
+      "fillerTags": [
+        "happy-little-trees-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "joy of painting bob ross"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "how-to",
+        "pbs"
+      ]
+    },
+    {
+      "id": "ch-67-muppet-theater",
+      "number": 67,
+      "displayName": "Muppet Theater",
+      "genre": "Jim Henson",
+      "categoryLabel": "JIM HENSON",
+      "color": "#3BB273",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "henson"
+      ],
+      "fillerTags": [
+        "muppet-theater-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "muppet show",
+        "fraggle rock",
+        "dinosaurs tv series",
+        "muppet babies"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "pbs-kids"
+      ]
+    },
+    {
+      "id": "ch-68-blockbuster-night",
+      "number": 68,
+      "displayName": "Blockbuster Night",
+      "genre": "80S & 90S Movies",
+      "categoryLabel": "80s & 90s MOVIES",
+      "color": "#003F87",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "blockbuster-movie"
+      ],
+      "fillerTags": [
+        "blockbuster-night-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "1990s movie",
+        "1980s movie",
+        "action movie"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "movie",
+        "action-movie"
+      ]
+    },
+    {
+      "id": "ch-69-agent-007",
+      "number": 69,
+      "displayName": "Agent 007",
+      "genre": "James Bond",
+      "categoryLabel": "JAMES BOND",
+      "color": "#8A8D91",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "bond"
+      ],
+      "fillerTags": [
+        "agent-007-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "james bond 007"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "blockbuster-movie"
+      ]
+    },
+    {
+      "id": "ch-70-kaiju-theater",
+      "number": 70,
+      "displayName": "Kaiju Theater",
+      "genre": "Monster Movies",
+      "categoryLabel": "MONSTER MOVIES",
+      "color": "#4F772D",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "kaiju"
+      ],
+      "fillerTags": [
+        "kaiju-theater-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "godzilla",
+        "gamera",
+        "kaiju"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "drive-in"
+      ]
+    },
+    {
+      "id": "ch-71-thursday-night-2000s",
+      "number": 71,
+      "displayName": "Thursday Night 2000s",
+      "genre": "Sitcoms",
+      "categoryLabel": "SITCOMS",
+      "color": "#6A4C93",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "thursday-2000s"
+      ],
+      "fillerTags": [
+        "thursday-night-2000s-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "the office",
+        "parks and recreation",
+        "30 rock",
+        "community",
+        "my name is earl"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "must-see-sitcom"
+      ]
+    },
+    {
+      "id": "ch-72-techtv-g4",
+      "number": 72,
+      "displayName": "TechTV / G4",
+      "genre": "Games & Tech",
+      "categoryLabel": "GAMES & TECH",
+      "color": "#00A6ED",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "g4-techtv"
+      ],
+      "fillerTags": [
+        "techtv-g4-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "g4 techtv",
+        "x-play",
+        "screen savers",
+        "video game commercials"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "commercials-90s"
+      ]
+    },
+    {
+      "id": "ch-73-middle-earth-hogwarts",
+      "number": 73,
+      "displayName": "Middle-earth & Hogwarts",
+      "genre": "Fantasy Movies",
+      "categoryLabel": "FANTASY MOVIES",
+      "color": "#7F5539",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "fantasy-movie"
+      ],
+      "fillerTags": [
+        "middle-earth-hogwarts-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "lord of the rings",
+        "harry potter",
+        "fantasy movie"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "blockbuster-movie",
+        "disney-movie"
+      ]
+    },
+    {
+      "id": "ch-74-enterprise-d",
+      "number": 74,
+      "displayName": "Enterprise-D",
+      "genre": "Star Trek: Tng",
+      "categoryLabel": "STAR TREK: TNG",
+      "color": "#B5A642",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "star-trek-tng"
+      ],
+      "fillerTags": [
+        "enterprise-d-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "star trek the next generation",
+        "star trek tng"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "star-trek"
+      ]
+    },
+    {
+      "id": "ch-76-voyager",
+      "number": 76,
+      "displayName": "Voyager",
+      "genre": "Star Trek: Voyager",
+      "categoryLabel": "STAR TREK: VOYAGER",
+      "color": "#3B5B92",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "star-trek-voyager"
+      ],
+      "fillerTags": [
+        "voyager-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "star trek voyager"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "star-trek"
+      ]
+    },
+    {
+      "id": "ch-77-trek-cinema",
+      "number": 77,
+      "displayName": "Trek Cinema",
+      "genre": "Star Trek Films",
+      "categoryLabel": "STAR TREK FILMS",
+      "color": "#1C1C3C",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "star-trek-movie"
+      ],
+      "fillerTags": [
+        "trek-cinema-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "star trek the motion picture",
+        "star trek wrath of khan",
+        "star trek first contact"
+      ],
+      "ignoreEra": true,
+      "fallbackTags": [
+        "star-trek",
+        "sci-fi"
+      ]
+    },
+    {
+      "id": "ch-99-classic-commercials",
+      "number": 99,
+      "displayName": "Classic Commercials",
+      "genre": "Commercials",
+      "categoryLabel": "COMMERCIALS",
+      "color": "#FF9F1C",
+      "enabled": true,
+      "scheduleRevision": "2",
+      "epochUtcMs": 1767225600000,
+      "policy": "DAYPARTED",
+      "playlist": [],
+      "fallbackPool": [],
+      "timeZone": "America/New_York",
+      "dayparts": [],
+      "defaultTags": [
+        "commercial-reels",
+        "commercials-90s"
+      ],
+      "fillerTags": [
+        "classic-commercials-bumpers",
+        "commercials-90s",
+        "station-id",
+        "promos-90s"
+      ],
+      "discoveryQueries": [
+        "classic commercials 199*",
+        "1990s commercials",
+        "commercials 1995",
+        "commercial compilation vhs"
+      ],
+      "ignoreEra": false,
+      "fallbackTags": []
+    }
+  ],
+  "assets": []
+}

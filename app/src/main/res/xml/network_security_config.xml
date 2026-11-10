@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HTTPS only. A local schedule server for emulator development must also use HTTPS,
+     or add a debug-only domain-config for 10.0.2.2 in src/debug (see docs/TROUBLESHOOTING.md). -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

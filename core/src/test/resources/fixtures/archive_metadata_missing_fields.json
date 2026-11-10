@@ -1,0 +1,9 @@
+{
+  "metadata": {"identifier": "fixture-sparse"},
+  "files": [
+    {"name": "tape.ogv", "format": "Ogg Video"},
+    {"name": "tape_thumb.jpg"},
+    {"format": "h.264"},
+    "not-an-object"
+  ]
+}

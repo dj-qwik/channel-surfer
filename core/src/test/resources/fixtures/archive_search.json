@@ -1,0 +1,12 @@
+{
+  "responseHeader": {"status": 0, "QTime": 12},
+  "response": {
+    "numFound": 3,
+    "start": 0,
+    "docs": [
+      {"identifier": "fixture-wxyz-1994-aircheck", "title": "FIXTURE WXYZ 1994", "year": 1994, "collection": ["fixture_tv_airchecks"], "mediatype": "movies"},
+      {"identifier": "fixture-saturday-morning-1995", "title": ["Fixture Saturday Morning 1995"], "date": "1995-10-07T00:00:00Z", "collection": "fixture_vhs"},
+      {"identifier": "bad id with spaces", "title": "dropped"}
+    ]
+  }
+}
