@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "cable-lineup-2026-11-04",
+  "revision": "cable-lineup-2026-11-10",
   "generatedAtUtcMs": 1762182000000,
   "eraPolicy": {
     "minYear": 1990,
@@ -286,9 +286,10 @@
       ],
       "fillerTags": [
         "pbs-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "pbs-promos"
       ],
       "discoveryQueries": [
         "pbs 199*",
@@ -1945,9 +1946,9 @@
       ],
       "fillerTags": [
         "nickelodeon-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "nickelodeon 199*",
@@ -2076,9 +2077,9 @@
       ],
       "fillerTags": [
         "cartoon-network-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "cartoon network 199*",
@@ -2173,9 +2174,9 @@
       ],
       "fillerTags": [
         "disney-channel-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "disney channel 199*",
@@ -3100,9 +3101,10 @@
       ],
       "fillerTags": [
         "amc-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "movie-trailers"
       ],
       "discoveryQueries": [
         "amc 199*",
@@ -3161,9 +3163,10 @@
       ],
       "fillerTags": [
         "tcm-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "movie-trailers"
       ],
       "discoveryQueries": [
         "tcm 199*",
@@ -3374,9 +3377,10 @@
       ],
       "fillerTags": [
         "hbo-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "movie-trailers"
       ],
       "discoveryQueries": [
         "hbo 199*",
@@ -3436,9 +3440,10 @@
       ],
       "fillerTags": [
         "cinemax-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "movie-trailers"
       ],
       "discoveryQueries": [
         "cinemax 199*",
@@ -3496,9 +3501,10 @@
       ],
       "fillerTags": [
         "showtime-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "movie-trailers"
       ],
       "discoveryQueries": [
         "showtime 199*",
@@ -3709,9 +3715,9 @@
       ],
       "fillerTags": [
         "disney-afternoon-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "ducktales",
@@ -3852,9 +3858,9 @@
       ],
       "fillerTags": [
         "saturday-morning-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "he-man",
@@ -4069,9 +4075,9 @@
       ],
       "fillerTags": [
         "gotham-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "batman animated series",
@@ -4104,9 +4110,9 @@
       ],
       "fillerTags": [
         "marvel-toons-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "x-men animated series",
@@ -4139,9 +4145,9 @@
       ],
       "fillerTags": [
         "nicktoons-24-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "rugrats",
@@ -4177,9 +4183,9 @@
       ],
       "fillerTags": [
         "midnight-society-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "are you afraid of the dark",
@@ -4212,9 +4218,10 @@
       ],
       "fillerTags": [
         "happy-little-trees-bumpers",
-        "commercials-90s",
+        "commercial-free",
         "station-id",
-        "promos-90s"
+        "promos-90s",
+        "pbs-promos"
       ],
       "discoveryQueries": [
         "joy of painting bob ross"
@@ -4245,9 +4252,9 @@
       ],
       "fillerTags": [
         "muppet-theater-bumpers",
-        "commercials-90s",
+        "ads-kids",
         "station-id",
-        "promos-90s"
+        "promos-kids"
       ],
       "discoveryQueries": [
         "muppet show",

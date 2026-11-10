@@ -58,6 +58,7 @@ sub init()
     m.retryTimer.observeField("fire", "retryProgram")
     m.errCount = 0
     m.lastKey = ""
+    m.bannerTitle = ""
     m.snowTimer = m.top.findNode("snowTimer")
     m.snowTimer.observeField("fire", "nextSnow")
     m.driftTimer = m.top.findNode("driftTimer")
@@ -180,7 +181,11 @@ sub tick()
     if it.u = "-"
         m.video.control = "stop"
         m.url = ""
-        showSlate(it.t, "We'll be right back")
+        if Left(UCase(it.t), 7) = "UP NEXT"
+            showCard("COMING UP NEXT", Mid(it.t, 10))
+        else
+            showSlate(it.t, "We'll be right back")
+        end if
     else
         m.basePos = it.o + (now - it.s)
         m.baseMs = m.clock.TotalMilliseconds()
@@ -198,8 +203,11 @@ sub tick()
         end if
         hideSlate()
     end if
-    ' Banner for programs, not for every commercial.
-    if it.e - it.s > 180 then showBanner()
+    ' Banner when a new show starts, not after every commercial break.
+    if it.u <> "-" and it.t <> m.bannerTitle and it.e - it.s > 120
+        m.bannerTitle = it.t
+        showBanner()
+    end if
 end sub
 
 ' ---------------------------------------------------------------- power-on intro
@@ -301,9 +309,25 @@ function SAVER_AFTER_MS() as Integer
     return 15 * 60 * 1000
 end function
 
+' A quiet "Coming up next" card between shows: no static, no hiss.
+sub showCard(title as String, detail as String)
+    m.slateTitle.text = title
+    m.slateText.text = detail
+    m.snowTimer.control = "stop"
+    m.hissTimer.control = "stop"
+    m.hiss.control = "stop"
+    m.top.findNode("snow").visible = false
+    m.saver.visible = false
+    m.top.findNode("cardBg").visible = true
+    m.msgBox.visible = true
+    m.slate.visible = true
+    m.driftTimer.control = "start"
+end sub
+
 sub showSlate(title as String, detail as String)
     m.slateTitle.text = title
     m.slateText.text = detail
+    m.top.findNode("cardBg").visible = false
     if m.slate.visible and m.snowTimer.control = "start" then return
     m.slate.visible = true
     m.saver.visible = false

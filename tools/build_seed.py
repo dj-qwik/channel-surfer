@@ -8,7 +8,7 @@ into catalog assets and writes them into the bundled lineup manifest next to the
 import hashlib, json, os, re, sys, urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from seed_buckets import B  # noqa: E402
+from seed_buckets import B, B2  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,6 +43,9 @@ ALIASES = {
     "tnbc": ["teen-sitcom"], "scrubs": ["thursday-2000s"],
 }
 FILLER_KIND = {"C"}
+PROMO_JUNK = re.compile(r"\b(fbi warning|warning screen|copyright|screen recording|youtube|legal|notice|open beta|clg video|less clutter|interpol|countdown|logo reveal|test pattern|output \(\d+\)|20(09|1\d|2\d))\b|nbc sports network|olympics", re.I)
+KIDS_PROMO = re.compile(r"\b(kids ?wb|kidswb|cartoon network|toonami|nick|nickelodeon|nicktoons|disney|fox kids|abc kids|cn|one saturday morning|cbs kids|pbs kids|playhouse|treehouse|ytv|boomerang)\b", re.I)
+ADULT_AD = re.compile(r"\b(adult|hotline|porn|xxx|softcore|sexploitation|emmanuelle|vondel|stripper|centerfold|900[- ]?number|1-900|lingerie|sexy?|playboy|girls gone wild|x-rated|nude|erotic)\b", re.I)
 JUNK = re.compile(r"\b(asmr|roleplay|tutorial|secretly|press kit|electronic press|toy fair|raw tour|promos and|reaction|reacts|review|podcast|retrospective|speedrun|let'?s play|gameplay|unboxing|explained|vlog|blooper|trying to|cold war)\b", re.I)
 TAG = re.compile(r"^[a-z0-9][a-z0-9-]{0,39}$")
 NUM_SPLIT = re.compile(r"\s+[-–—:|]\s+")
@@ -122,15 +125,21 @@ def cross_tags(title, item_title, kind):
     return out
 
 
+KIDS_AD = re.compile(r"\b(toys?|cereal|candy|barbie|hot ?wheels|lego|nintendo|sega|game ?boy|playstation|n64|kool-?aid|fruit snacks|gushers|lunchables|happy meal|kids|nickelodeon|nick|cartoon|action figures?|dolls?|mattel|hasbro|kenner|tonka|nerf|super soaker|furby|tamagotchi|pok[eé]mon|power rangers|ninja turtles|tmnt|g\.?i\.? joe|transformers|my little pony|polly pocket|easy-?bake|crayola|play-?doh|trix|lucky charms|frosted flakes|cap'?n crunch|cocoa|cinnamon toast|pop-?tarts|capri sun|sunny ?d|chuck e\.? cheese|fisher-?price|little tikes|spaghettios|oreo|chips ahoy|twinkies?|skittles|starburst|m&m|fruit by the foot|fruit roll|go-?gurt|bagel bites|pizza rolls|ecto ?cooler|toys ?r ?us|kenner|micro machines|teddy ruxpin|cabbage patch|ghostbusters|beanie|yo-?yo|bop it|simon|hungry hungry|mouse ?trap|operation|twister|nickelodeon|fox kids|kids ?wb|saturday morning)\b", re.I)
+
+
 def build(records):
     assets, by_bucket = {}, {}
+    BB = list(B) + list(B2)
     for bi, ident, fname, title, secs, year, item_title, _fmt in records:
-        tag, kind, queries = B[bi][0], B[bi][1], B[bi][2]
+        tag, kind, queries = BB[bi][0], BB[bi][1], BB[bi][2]
         aid = asset_id(ident, fname)
         if not re.match(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$", aid) or secs <= 0:
             continue
-        if kind == "C":
-            ctype = "PROMO_BUMPER" if tag in ("promos-90s", "cartoon-network-bumpers") else "COMMERCIAL"
+        if kind == "T":
+            ctype = "TRAILER"
+        elif kind == "C":
+            ctype = "PROMO_BUMPER" if tag in ("promos-90s", "cartoon-network-bumpers") or re.search(r"\b(promo|bumper|bump|station id|ident)\b", title, re.I) else "COMMERCIAL"
         elif kind == "V":
             ctype = "MUSIC_VIDEO"
         elif kind == "M":
@@ -143,7 +152,20 @@ def build(records):
             ctype = "EPISODE"
         if kind not in ("C", "V") and (JUNK.search(title) or JUNK.search(item_title or "")):
             continue
+        if kind in ("C", "T") and ADULT_AD.search(f"{title} {item_title}"):
+            continue
+        if kind == "C" and PROMO_JUNK.search(f"{title} {item_title}"):
+            continue
         tags = [tag] + [t for t in ALIASES.get(tag, []) if t != tag]
+        if kind == "C" and tag != "cartoon-network-bumpers":
+            # Every commercial airs on regular channels; kid-targeted ones also on the kids' networks.
+            if ctype == "COMMERCIAL":
+                tags += ["commercials-90s"] + (["ads-kids"] if KIDS_AD.search(f"{title} {item_title}") else [])
+            elif KIDS_PROMO.search(f"{title} {item_title}"):
+                # Kids-network promos and bumpers stay on the kids' channels.
+                tags = [t for t in tags if t != "promos-90s"] + ["promos-kids"]
+            else:
+                tags += ["promos-90s"]
         if kind in ("E", "M", "X"):
             for ct in cross_tags(title, item_title, kind):
                 tags += [ct] + ALIASES.get(ct, [])
@@ -171,6 +193,10 @@ def build(records):
 
 def main():
     records = json.load(open(sys.argv[1]))
+    # Optional second harvest (commercials + trailers), bucket indexes into B2, shifted past B.
+    if len(sys.argv) > 2:
+        extra = json.load(open(sys.argv[2]))
+        records += [[len(B) + r[0]] + r[1:] for r in extra]
     assets, by_bucket = build(records)
     path = os.path.join(ROOT, "app/src/main/assets/default_manifest.json")
     manifest = json.load(open(os.path.join(ROOT, "manifest/channel-surf-manifest.json")))

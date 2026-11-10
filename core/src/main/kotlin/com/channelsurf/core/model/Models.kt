@@ -42,9 +42,14 @@ enum class SchedulePolicy {
 
 /** What a recording is. Dayparts prefer full episodes and movies over whole-tape airchecks. */
 enum class ContentType {
-    EPISODE, MOVIE, AIRCHECK_BLOCK, MUSIC_VIDEO, COMMERCIAL, PROMO_BUMPER, SHOPPING, NEWS, SPORTS, SPECIAL, OTHER;
+    EPISODE, MOVIE, AIRCHECK_BLOCK, MUSIC_VIDEO, COMMERCIAL, PROMO_BUMPER, SHOPPING, NEWS, SPORTS, SPECIAL, OTHER,
+    /** Movie trailers: fill the time after a movie until the next one starts. */
+    TRAILER;
 
-    val isFiller: Boolean get() = this == COMMERCIAL || this == PROMO_BUMPER
+    val isFiller: Boolean get() = this == COMMERCIAL || this == PROMO_BUMPER || this == TRAILER
+
+    /** Starts on the half-hour grid (with breaks); music videos and shopping run back to back instead. */
+    val onGrid: Boolean get() = this != MUSIC_VIDEO && this != SHOPPING && !isFiller
     val isFullProgram: Boolean get() = this == EPISODE || this == MOVIE || this == SPECIAL || this == NEWS || this == SPORTS
 }
 
@@ -222,7 +227,34 @@ data class ProgramBlock(
     val revision: String,
     /** Programming block name shown in the guide, e.g. "TOONAMI". */
     val daypartTitle: String? = null,
+    /**
+     * The half-hour-grid airing this block belongs to (a show plus its commercial breaks, or a movie plus the
+     * trailers after it). The guide and the info banner show the airing, not the individual act or commercial.
+     */
+    val slotStartUtcMs: Long? = null,
+    val slotEndUtcMs: Long? = null,
+    val slotTitle: String? = null,
+    val slotAssetId: String? = null,
 ) {
     val endUtcMs: Long get() = startUtcMs + durationMs
     fun contains(utcMs: Long): Boolean = utcMs >= startUtcMs && utcMs < endUtcMs
+
+    /** The program name viewers should see right now: the show, even during its commercials. */
+    val headline: String get() = slotTitle ?: displayTitle
+
+    /** This block's whole airing as one block (for the guide and banner); itself when it isn't part of one. */
+    fun slotView(description: String = this.description): ProgramBlock {
+        val s = slotStartUtcMs ?: return this
+        val e = slotEndUtcMs ?: return this
+        return copy(
+            id = ScheduleIds.slotId(channelId, s), assetId = slotAssetId ?: assetId, startUtcMs = s, durationMs = e - s,
+            sourceOffsetMs = 0, displayTitle = slotTitle ?: displayTitle, description = description, kind = BlockKind.PROGRAM,
+        )
+    }
+}
+
+object ScheduleIds {
+    /** Title prefix of the short card before the next show: "Up Next: Seinfeld". */
+    const val UP_NEXT = "Up Next"
+    fun slotId(channelId: String, startUtcMs: Long) = "slot:$channelId:$startUtcMs"
 }

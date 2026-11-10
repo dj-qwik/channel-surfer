@@ -157,3 +157,13 @@ B = [
     ("commercial-reels", "A", ["commercial compilation", "commercials compilation", "90s commercials vhs", "commercial breaks 199", "commercials from 199"]),
     ("promos-90s", "C", ["tv promos 199", "network promos", "station ids", "station id", "nbc promos", "fox promos", "abc promos", "cbs promos", "upn promos", "wb promos", "nickelodeon bumpers", "nickelodeon promos", "mtv promos", "mtv ids", "disney channel bumpers", "tv bumpers", "network bumpers", "fbi warning vhs", "coming attractions vhs"]),
 ]
+
+
+# Second harvest (tools/harvest.js run with these buckets): commercials and movie trailers.
+# Kinds: C = commercials/bumpers (8 s - 2.5 min), T = trailers (40 s - 4.3 min).
+B2 = [
+    ("ads-by-year", "C", []),
+    ("ads-kids", "C", []),
+    ("ads-general", "C", []),
+    ("movie-trailers", "T", []),
+]

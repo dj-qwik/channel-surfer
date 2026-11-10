@@ -11,7 +11,7 @@ The manifest carries NO media. Recordings arrive through discovery/curation and 
 """
 import json, os, re, sys
 
-REVISION = "cable-lineup-2026-11-04"
+REVISION = "cable-lineup-2026-11-10"
 
 ALL = [1, 2, 3, 4, 5, 6, 7]
 WD = [1, 2, 3, 4, 5]
@@ -248,6 +248,19 @@ C = [
 ]
 
 FILLER = ["commercials-90s", "station-id", "promos-90s"]
+# Kids' networks get the toy/cereal/candy spots; premium channels and PBS ran no commercials at all
+# (just promos and, on the movie channels, trailers between features).
+KIDS = {26, 27, 28, 52, 56, 62, 63, 64, 65, 67}
+COMMERCIAL_FREE = {3, 40, 41, 45, 46, 47, 66}
+MOVIE_CHANNELS = {40, 41, 45, 46, 47}
+
+
+def filler_for(n):
+    if n in KIDS:
+        return ["ads-kids", "station-id", "promos-kids"]
+    if n in COMMERCIAL_FREE:
+        return ["commercial-free", "station-id", "promos-90s"] + (["movie-trailers"] if n in MOVIE_CHANNELS else ["pbs-promos"])
+    return FILLER
 
 # When a channel has nothing of its own for a block, it borrows from these related pools instead of going
 # off the air (like a real station running a syndicated rerun).
@@ -304,7 +317,7 @@ def channel(n, name, cat, color, tags, parts, queries):
         "timeZone": "America/New_York",
         "dayparts": parts,
         "defaultTags": tags,
-        "fillerTags": [f"{s}-bumpers"[:40]] + FILLER,
+        "fillerTags": [f"{s}-bumpers"[:40]] + filler_for(n),
         "discoveryQueries": (queries if themed else [f"{name.lower()} 199*"] + queries),
         "ignoreEra": themed,
         "fallbackTags": FALLBACK.get(n, []),

@@ -102,7 +102,7 @@ class DaypartSchedulerTest {
     fun scheduleChangesFromDayToDay() {
         val e = ScheduleEngine(lineup())
         fun dayOrder(d: Int) = e.blocksBetween("ch-27-cartoon-network", at(2026, 11, d, 6), at(2026, 11, d, 16))
-            .filter { it.kind == BlockKind.PROGRAM }.map { it.assetId }
+            .filter { it.kind == BlockKind.PROGRAM && it.slotAssetId != null }.distinctBy { it.slotStartUtcMs }.map { it.slotAssetId }
         val tue = dayOrder(3)
         val wed = dayOrder(4)
         assertNotEquals("each day gets a different lineup", tue, wed)
@@ -139,12 +139,16 @@ class DaypartSchedulerTest {
         val e = ScheduleEngine(lineup())
         val blocks = e.blocksBetween("ch-27-cartoon-network", at(2026, 11, 2, 6), at(2026, 11, 3, 6))
         assertTrue(blocks.any { it.assetId?.startsWith("bump") == true })
-        // Episodes are never cut: every program block lasts its full length (only aircheck tapes may be cut).
+        // Episodes are split only by commercial breaks: every episode's acts add up to its whole runtime, in order.
         val assets = lineup().assets
-        blocks.filter { it.kind == BlockKind.PROGRAM }.forEach { b ->
-            val asset = assets.getValue(b.assetId!!)
-            if (asset.contentType != ContentType.AIRCHECK_BLOCK) assertEquals(asset.playDurationMs, b.durationMs)
-        }
+        blocks.filter { it.kind == BlockKind.PROGRAM && assets.getValue(it.assetId!!).contentType == ContentType.EPISODE }
+            .groupBy { it.slotStartUtcMs to it.assetId }
+            .forEach { (k, acts) ->
+                if (acts.first().startUtcMs < at(2026, 11, 2, 6) + 1 || acts.last().endUtcMs > at(2026, 11, 3, 6) - 1) return@forEach
+                assertEquals(0L, acts.first().sourceOffsetMs)
+                acts.zipWithNext().forEach { (x, y) -> assertEquals(x.sourceOffsetMs + x.durationMs, y.sourceOffsetMs) }
+                assertEquals(assets.getValue(k.second!!).playDurationMs, acts.sumOf { it.durationMs })
+            }
     }
 
     @Test
@@ -213,5 +217,75 @@ class DaypartSchedulerTest {
         // The same 1967 episodes on a regular (era) channel stay off the air.
         val era = ScheduleEngine(l.copy(channels = listOf(trek.copy(ignoreEra = false))))
         assertTrue(era.blocksBetween("ch-75-ds9", from, from + 24 * HOUR).none { it.assetId != null && it.kind == BlockKind.PROGRAM })
+    }
+
+    // ---------------------------------------------------------------- half-hour grid
+
+    private fun localMinute(utc: Long) = java.time.Instant.ofEpochMilli(utc).atZone(java.time.ZoneId.of("America/New_York")).minute
+
+    private fun gridLineup(extra: List<MediaAsset> = emptyList(), fillerTags: List<String> = listOf("ads")): Lineup {
+        val ch = cartoonChannel().copy(dayparts = emptyList(), defaultTags = listOf("show"), fillerTags = fillerTags)
+        val assets = buildList {
+            (1..10).forEach { add(a("ep$it", 0, ContentType.EPISODE, "show").copy(durationMs = (22 * 60 + it * 7) * 1000L)) }
+            (1..40).forEach { add(a("ad$it", 0, ContentType.COMMERCIAL, "ads").copy(durationMs = if (it % 3 == 0) 15_000 else 30_000)) }
+            (1..10).forEach { add(a("tr$it", 0, ContentType.TRAILER, "movie-trailers").copy(durationMs = 140_000)) }
+            addAll(extra)
+        }.associateBy { it.id }
+        return Lineup("g", 0, listOf(ch), assets)
+    }
+
+    @Test
+    fun showsStartOnTheHourAndHalfHourWithBreaksInside() {
+        val l = gridLineup()
+        val e = ScheduleEngine(l)
+        val from = at(2026, 11, 2, 6)
+        val day = e.blocksBetween("ch-27-cartoon-network", from, from + 24 * HOUR)
+        assertTrue(ScheduleValidator.problems(day, from, from + 24 * HOUR).isEmpty())
+        val airings = day.filter { it.slotStartUtcMs != null }.groupBy { it.slotStartUtcMs!! }
+        assertTrue(airings.size >= 46)
+        airings.forEach { (start, blocks) ->
+            assertTrue("starts at :00/:30", localMinute(start) % 30 == 0)
+            assertTrue(localMinute(blocks.first().slotEndUtcMs!!) % 30 == 0)
+            // cold open, act one, act two, tag = 4 pieces of the show, with commercials between them
+            val acts = blocks.filter { it.assetId?.startsWith("ep") == true }
+            assertEquals(4, acts.size)
+            assertTrue(blocks.any { it.assetId?.startsWith("ad") == true })
+            assertTrue(blocks.none { it.assetId?.startsWith("tr") == true })
+            // the guide and banner see one show
+            assertEquals(1, blocks.map { it.slotView().id }.toSet().size)
+            assertEquals(30 * MIN, blocks.first().slotView().durationMs)
+        }
+    }
+
+    @Test
+    fun moviesRunUninterruptedThenTrailersUntilTheNextSlot() {
+        val movie = a("movie1", 0, ContentType.MOVIE, "show").copy(durationMs = 97 * MIN)
+        val l = gridLineup().let { g -> g.copy(assets = g.assets.filterKeys { !it.startsWith("ep") } + (movie.id to movie)) }
+        val e = ScheduleEngine(l)
+        val from = at(2026, 11, 2, 6)
+        val day = e.blocksBetween("ch-27-cartoon-network", from, from + 24 * HOUR)
+        val airing = day.filter { it.slotAssetId == "movie1" }.groupBy { it.slotStartUtcMs }.values.first { it.first().startUtcMs >= from }
+        val movieBlocks = airing.filter { it.assetId == "movie1" }
+        assertEquals(1, movieBlocks.size)
+        assertEquals(97 * MIN, movieBlocks.single().durationMs)
+        assertEquals(120 * MIN, airing.first().slotEndUtcMs!! - airing.first().slotStartUtcMs!!)
+        assertTrue(airing.drop(1).filter { it.kind == BlockKind.PROGRAM }.all { it.assetId!!.startsWith("tr") })
+    }
+
+    @Test
+    fun shortCartoonsShareAHalfHourAndCommercialFreeChannelsSkipMidShowBreaks() {
+        val shorts = (1..8).map { a("short$it", 11, ContentType.EPISODE, "show") }
+        val l = gridLineup().let { g -> g.copy(assets = g.assets.filterKeys { !it.startsWith("ep") } + shorts.associateBy { it.id }) }
+        val from = at(2026, 11, 2, 6)
+        val day = ScheduleEngine(l).blocksBetween("ch-27-cartoon-network", from, from + 6 * HOUR)
+        val airing = day.filter { it.slotStartUtcMs != null && it.startUtcMs >= from }.groupBy { it.slotStartUtcMs }.values.first()
+        assertEquals(2, airing.mapNotNull { it.assetId }.filter { it.startsWith("short") }.toSet().size)
+        assertTrue(airing.first().slotTitle!!.contains(" / "))
+
+        val free = gridLineup(fillerTags = listOf("ads", "commercial-free"))
+        val freeDay = ScheduleEngine(free).blocksBetween("ch-27-cartoon-network", from, from + 6 * HOUR)
+        freeDay.filter { it.slotStartUtcMs != null && it.startUtcMs >= from }.groupBy { it.slotStartUtcMs }.values.forEach { blocks ->
+            assertEquals(1, blocks.count { it.assetId?.startsWith("ep") == true })
+        }
     }
 }

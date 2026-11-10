@@ -247,10 +247,16 @@ private fun VideoPane(
         val zone = ZoneId.systemDefault()
         when (ps.phase) {
             PlayerPhase.NO_SIGNAL -> when (ps.slateKind) {
-                SlateKind.STATION_BREAK -> Slate(
-                    SlateStyle.BLUE_SCREEN, channelName.uppercase(),
-                    "We'll be right back" + (ps.resolution?.block?.daypartTitle?.let { " · $it" } ?: ""), channelNumber,
-                )
+                SlateKind.STATION_BREAK -> {
+                    val title = ps.resolution?.block?.displayTitle.orEmpty()
+                    if (title.startsWith(com.channelsurf.core.model.ScheduleIds.UP_NEXT)) Slate(
+                        SlateStyle.BLUE_SCREEN, "COMING UP NEXT",
+                        title.substringAfter(": ", "").ifBlank { channelName } + " · " + channelName, channelNumber,
+                    ) else Slate(
+                        SlateStyle.BLUE_SCREEN, channelName.uppercase(),
+                        "We'll be right back" + (ps.resolution?.block?.daypartTitle?.let { " · $it" } ?: ""), channelNumber,
+                    )
+                }
                 SlateKind.TECHNICAL_DIFFICULTIES -> Slate(
                     SlateStyle.COLOR_BARS, "TECHNICAL DIFFICULTIES\nPLEASE STAND BY",
                     ps.resolution?.let { "Programming resumes at ${GuideBuilder.label(it.block.endUtcMs, zone)}" }, channelNumber,

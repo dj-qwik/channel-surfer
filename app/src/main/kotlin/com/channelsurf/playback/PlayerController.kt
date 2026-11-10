@@ -345,11 +345,15 @@ class PlayerController(
                     endUtcMs = minOf(b.endUtcMs, r.playUntilUtcMs).coerceAtLeast(b.startUtcMs + 1_000),
                     fileOffsetMs = r.expectedFilePositionMs(b.startUtcMs),
                     hls = r.asset.container == "hls",
-                    title = b.displayTitle, url = r.mediaUrl,
+                    title = b.headline, url = r.mediaUrl,
                 )
                 is TuneResolution.Slate -> RokuManager.QueueItem(
                     startUtcMs = b.startUtcMs, endUtcMs = b.endUtcMs, fileOffsetMs = 0, hls = false,
-                    title = if (r.kind == SlateKind.STATION_BREAK) r.channel.displayName.uppercase() else "OFF AIR", url = null,
+                    title = when {
+                        b.displayTitle.startsWith(com.channelsurf.core.model.ScheduleIds.UP_NEXT) -> b.displayTitle.uppercase()
+                        r.kind == SlateKind.STATION_BREAK -> r.channel.displayName.uppercase()
+                        else -> "OFF AIR"
+                    }, url = null,
                 )
             }
         }
@@ -437,7 +441,7 @@ class PlayerController(
                     )
                     .setMediaMetadata(
                         MediaMetadata.Builder()
-                            .setTitle(res.block.displayTitle)
+                            .setTitle(res.block.headline)
                             .setArtist("${res.channel.displayNumber} ${res.channel.displayName}")
                             .build()
                     )
@@ -645,7 +649,8 @@ class PlayerController(
         const val EARLY_END_GRACE_MS = 2_000L
         /** How much schedule the Roku gets at a time, and how often it's topped up. */
         const val ROKU_QUEUE_MS = 12 * 3_600_000L
-        const val ROKU_QUEUE_MAX_ITEMS = 240
+        /** Shows now come with their commercials (~20 items per half hour). */
+        const val ROKU_QUEUE_MAX_ITEMS = 700
         const val ROKU_REFILL_MS = 30 * 60_000L
     }
 }

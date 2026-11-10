@@ -19,6 +19,7 @@
         <Poster id="snow4" width="1920" height="1080" uri="pkg:/images/snow4.png" loadDisplayMode="scaleToFill" visible="false" />
         <Poster id="snow5" width="1920" height="1080" uri="pkg:/images/snow5.png" loadDisplayMode="scaleToFill" visible="false" />
       </Group>
+      <Rectangle id="cardBg" width="1920" height="1080" color="0x061B5BFF" visible="false" />
       <Rectangle id="msgBox" translation="[360,380]" width="1200" height="300" color="0x000000B0">
         <Label id="slateTitle" translation="[0,50]" width="1200" horizAlign="center" color="0xFFFFFFFF" text="NO SIGNAL" font="font:LargeBoldSystemFont" />
         <Label id="slateText" translation="[60,170]" width="1080" horizAlign="center" wrap="true" color="0xD8E0F0FF"

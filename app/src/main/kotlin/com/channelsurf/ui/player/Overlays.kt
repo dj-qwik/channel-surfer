@@ -203,8 +203,10 @@ fun InfoBanner(
     modifier: Modifier = Modifier,
 ) {
     val zone = ZoneId.systemDefault()
-    val block = resolution?.block
+    // The whole airing (the show and its breaks), like a cable box banner, not the act or commercial.
+    val block = resolution?.block?.slotView()
     val play = resolution as? TuneResolution.Play
+    val inBreak = play != null && play.asset.contentType.isFiller && resolution.block.slotStartUtcMs != null
     Column(
         modifier
             .fillMaxWidth()
@@ -246,6 +248,12 @@ fun InfoBanner(
                     Box(Modifier.fillMaxHeight().fillMaxWidth(GuideBuilder.progress(block, nowUtcMs)).background(Cable.Teal))
                 }
             }
+            if (inBreak) Text(
+                (if (play!!.asset.contentType == com.channelsurf.core.model.ContentType.TRAILER) "COMING ATTRACTIONS" else "COMMERCIAL BREAK") +
+                    " · ${play.asset.guideTitle}",
+                style = Cable.GridLabel.copy(color = Cable.Mustard), maxLines = 1, overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(top = 4.dp),
+            )
             play?.segment?.takeIf { it.kind != SegmentKind.PROGRAM }?.let { seg ->
                 Text(
                     when (seg.kind) {

@@ -33,7 +33,7 @@ data class RokuDevice(val host: String, val port: Int, val name: String)
  */
 class RokuManager(context: Context, private val scope: CoroutineScope, private val diagnostics: DiagnosticsLog) {
     companion object {
-        private const val ITEMS_PER_REQUEST = 5
+        private const val ITEMS_PER_REQUEST = 8
     }
 
     private val wifi = context.applicationContext.getSystemService(WifiManager::class.java)
@@ -108,7 +108,7 @@ class RokuManager(context: Context, private val scope: CoroutineScope, private v
         val params = LinkedHashMap<String, String>()
         params["num"] = res.channel.displayNumber
         params["ch"] = res.channel.displayName
-        params["title"] = res.block.displayTitle.take(120)
+        params["title"] = res.block.headline.take(120)
         when (res) {
             is TuneResolution.Play -> {
                 params["url"] = res.mediaUrl

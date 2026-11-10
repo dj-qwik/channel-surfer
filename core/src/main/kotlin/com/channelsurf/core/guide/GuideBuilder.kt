@@ -65,7 +65,7 @@ object GuideBuilder {
         windowEndUtcMs: Long,
         nowUtcMs: Long,
     ): List<GuideRow> = channels.map { ch ->
-        val cells = engine.blocksBetween(ch.id, windowStartUtcMs, windowEndUtcMs).mapNotNull { b ->
+        val cells = airings(engine.blocksBetween(ch.id, windowStartUtcMs, windowEndUtcMs)).mapNotNull { b ->
             val s = maxOf(b.startUtcMs, windowStartUtcMs)
             val e = minOf(b.endUtcMs, windowEndUtcMs)
             if (e <= s) null else GuideCell(
@@ -78,6 +78,27 @@ object GuideBuilder {
             )
         }
         GuideRow(ch, mergeAdjacentSlates(cells))
+    }
+
+    /**
+     * A show's acts, its commercial breaks and its "up next" card are one listing in the guide, the way a
+     * real cable guide read: "7:00 Seinfeld", not every commercial.
+     */
+    fun airings(blocks: List<ProgramBlock>): List<ProgramBlock> {
+        val out = ArrayList<ProgramBlock>(blocks.size)
+        var i = 0
+        while (i < blocks.size) {
+            val b = blocks[i]
+            val slot = b.slotStartUtcMs
+            if (slot == null) { out += b; i++; continue }
+            var j = i
+            while (j + 1 < blocks.size && blocks[j + 1].slotStartUtcMs == slot) j++
+            // Description of the show itself (its first act), not of a commercial.
+            val main = (i..j).map { blocks[it] }.firstOrNull { it.assetId == b.slotAssetId } ?: b
+            out += b.slotView(main.description)
+            i = j + 1
+        }
+        return out
     }
 
     /** Hourly "off air" slates read better as one cell. */
